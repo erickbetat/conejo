@@ -1,0 +1,53 @@
+@extends('admin.layout')
+
+@section('title', 'Dashboard')
+
+@section('content')
+<header class="admin-header">
+    <a href="#" class="brand">CANTÚ<span>88</span></a>
+    
+    <div class="user-menu">
+        <span>Hola, {{ auth()->user()->name }}</span>
+        <span style="color: var(--color-gray); margin: 0 10px;">|</span>
+        <form method="POST" action="{{ route('admin.logout') }}">
+            @csrf
+            <button type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</header>
+
+<div class="container">
+    <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Panel Principal</h1>
+        <p style="color: var(--color-gray);">Bienvenido al centro de control de tu biografía y contenido premium.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        
+        <div class="glass-panel" style="padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">●</span> Biografía
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Actualiza tu historia personal, estadísticas y logros como piloto.</p>
+            <a href="{{ route('admin.biography.edit') }}" class="btn" style="text-decoration: none;">Editar Biografía</a>
+        </div>
+
+        <div class="glass-panel" style="padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">★</span> Contenido Premium
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Publica contenido exclusivo, fotos y noticias para tus suscriptores.</p>
+            <a href="{{ route('admin.content.index') }}" class="btn" style="text-decoration: none;">Gestionar Contenido</a>
+        </div>
+
+        <div class="glass-panel" style="padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">$</span> Suscriptores
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Revisa quién te está apoyando a través de MercadoPago.</p>
+            <button class="btn">Ver Suscriptores</button>
+        </div>
+
+    </div>
+</div>
+@endsection
