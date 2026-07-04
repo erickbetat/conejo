@@ -5,15 +5,18 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BiographyController;
 use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\PartnerController;
 
 use App\Models\Biography;
 use App\Models\Content;
+use App\Models\Partner;
 
 // Vista Pública (Landing Page)
 Route::get('/', function () {
     $biography = Biography::where('is_active', true)->first();
     $sections = Content::orderBy('sort_order', 'asc')->get();
-    return view('welcome', compact('biography', 'sections'));
+    $partners = Partner::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+    return view('welcome', compact('biography', 'sections', 'partners'));
 });
 
 // Rutas de Administración
@@ -33,5 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Contenido (Noticias/Posts)
         Route::resource('/content', ContentController::class)->except(['show']);
+
+        // Aliados / Socios
+        Route::resource('/partners', PartnerController::class)->except(['show']);
     });
 });

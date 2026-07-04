@@ -48,6 +48,14 @@
             <button class="btn">Ver Suscriptores</button>
         </div>
 
+        <div class="glass-panel" style="padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">★</span> Aliados
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Gestiona las empresas e instituciones que te apoyan.</p>
+            <a href="{{ route('admin.partners.index') }}" class="btn" style="text-decoration: none;">Ver Aliados</a>
+        </div>
+
     </div>
 </div>
 @endsection

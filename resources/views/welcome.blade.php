@@ -218,6 +218,32 @@
         </div>
     </section>
 
+    @if(isset($partners) && $partners->count() > 0)
+    <!-- Aliados Estratégicos -->
+    <section id="aliados" class="py-20 px-6 bg-brand-dark relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black tracking-widest text-white mb-4">Mis <span class="text-brand-red">Aliados</span></h2>
+                <p class="text-brand-gray text-xl max-w-2xl mx-auto font-light">Gracias a las empresas e instituciones que hacen posible este sueño.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
+                @foreach($partners as $partner)
+                    <div class="w-32 md:w-48 transition-transform duration-300 hover:scale-110 filter grayscale hover:grayscale-0 opacity-70 hover:opacity-100">
+                        @if($partner->url)
+                            <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer" class="block" title="{{ $partner->name }}">
+                                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-24">
+                            </a>
+                        @else
+                            <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-24" title="{{ $partner->name }}">
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!-- Opciones de Suscripción -->
     <section id="suscripciones" class="py-24 px-6 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] bg-brand-black relative">
         <div class="absolute inset-0 bg-gradient-to-b from-brand-black to-transparent opacity-90"></div>
