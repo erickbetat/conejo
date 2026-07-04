@@ -1,59 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto Conejo
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bienvenido al repositorio del proyecto **Conejo**. Este es un sistema desarrollado sobre el framework [Laravel](https://laravel.com/) diseñado para ofrecer una plataforma robusta y escalable.
 
-## About Laravel
+Actualmente el proyecto cuenta con características administrativas como la gestión de **Partners** (socios) dentro de un panel de administración (Admin).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Características Principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Panel de Administración (Admin):** Interfaz para la gestión integral del sistema.
+- **Gestión de Partners:** Módulo completo (CRUD) para registrar, editar, visualizar y eliminar socios.
+- **Diseño Responsivo e Interactivo:** Vistas implementadas con Blade y compilación de recursos mediante Vite.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tecnologías Utilizadas
 
-## Learning Laravel
+- **Framework:** Laravel (PHP)
+- **Base de Datos:** MySQL / MariaDB (configurable)
+- **Frontend:** Blade Templates, CSS/JS procesados con [Vite](https://vitejs.dev/)
+- **Control de Versiones:** Git
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📋 Requisitos Previos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Asegúrate de tener instalados los siguientes requerimientos en tu entorno local antes de continuar:
 
-## Laravel Sponsors
+- **PHP** >= 8.1
+- **Composer** (Gestor de dependencias de PHP)
+- **Node.js** y **npm** (Para compilar los assets del frontend)
+- **Servidor de Base de Datos** (MySQL, PostgreSQL, SQLite, etc.)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## ⚙️ Instalación y Configuración Local
 
-### Premium Partners
+Sigue estos pasos para levantar el entorno de desarrollo en tu máquina local:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/erickbetat/conejo.git
+   cd conejo
+   ```
 
-## Contributing
+2. **Instalar dependencias de PHP**
+   ```bash
+   composer install
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. **Configurar las variables de entorno**
+   Copia el archivo de ejemplo para crear tu propio archivo `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   *Nota: Asegúrate de configurar correctamente los datos de conexión a tu base de datos en el archivo `.env` (DB_DATABASE, DB_USERNAME, DB_PASSWORD).*
 
-## Code of Conduct
+4. **Generar la clave de la aplicación**
+   ```bash
+   php artisan key:generate
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. **Ejecutar las migraciones (Base de Datos)**
+   ```bash
+   php artisan migrate
+   ```
+   *Esto creará las tablas necesarias, incluyendo la tabla `partners` y las tablas por defecto de Laravel.*
 
-## Security Vulnerabilities
+6. **Instalar y compilar los recursos del frontend**
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7. **Iniciar el servidor de desarrollo**
+   En una nueva terminal, levanta el servidor de PHP:
+   ```bash
+   php artisan serve
+   ```
+   La aplicación estará disponible en `http://localhost:8000`.
 
-## License
+## 📂 Estructura del Código
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Algunas de las rutas y directorios más relevantes implementados para este proyecto:
+- `app/Models/Partner.php` - Modelo de datos para los socios.
+- `app/Http/Controllers/Admin/PartnerController.php` - Controlador lógico para el panel de administración.
+- `database/migrations/` - Archivos para la creación y alteración de tablas.
+- `resources/views/admin/partner/` - Vistas Blade para el panel de administración (index, create, edit).
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia [MIT](https://opensource.org/licenses/MIT).
