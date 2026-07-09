@@ -19,6 +19,15 @@ Route::get('/', function () {
     $settings = \App\Models\Setting::all()->keyBy('key');
     return view('welcome', compact('biography', 'sections', 'partners', 'settings'));
 });
+// Ruta de ayuda para Hostinger / Producción (crea el enlace simbólico del storage)
+Route::get('/crear-symlink', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return "¡Enlace simbólico creado con éxito! Ya deberían verse las imágenes.";
+    } catch (\Exception $e) {
+        return "Error al crear el enlace: " . $e->getMessage();
+    }
+});
 
 // Rutas de Administración
 Route::prefix('admin')->name('admin.')->group(function () {
