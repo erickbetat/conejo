@@ -312,33 +312,64 @@
         <div class="max-w-7xl mx-auto space-y-12">
             
             @if($biography)
-            <!-- Tarjeta de Biografía -->
-            <div class="bg-brand-dark border border-white/5 rounded-2xl overflow-hidden">
-                <div class="flex flex-col lg:flex-row">
-                    <div class="w-full lg:w-5/12 relative min-h-[400px]">
+            <!-- Biografía (Diseño Premium) -->
+            <div class="relative w-full rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(230,32,32,0.1)] group">
+                <!-- Capa de Fondo Dinámica -->
+                <div class="absolute inset-0 bg-brand-dark"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-red/20 via-transparent to-transparent opacity-80"></div>
+                
+                <div class="flex flex-col lg:flex-row relative z-10">
+                    <!-- Columna de Imagen -->
+                    <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-[650px] overflow-hidden lg:clip-path-bio">
                         @if($biography->image_path)
-                            <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay z-10 transition-all duration-500 hover:bg-transparent"></div>
-                            <img src="{{ asset('storage/' . $biography->image_path) }}" alt="{{ $biography->title }}" class="absolute inset-0 w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700">
+                            <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay z-10 transition-all duration-700 group-hover:bg-transparent"></div>
+                            <img src="{{ asset('storage/' . $biography->image_path) }}" alt="{{ $biography->title }}" class="absolute inset-0 w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transform group-hover:scale-105 transition-all duration-700">
                         @else
-                            <div class="absolute inset-0 bg-black flex items-center justify-center">
-                                <span class="text-brand-gray font-light">Sin Imagen</span>
+                            <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                                <span class="text-brand-gray font-light font-racing tracking-widest uppercase">Imagen del Piloto</span>
                             </div>
                         @endif
-                        <div class="absolute bottom-0 right-0 w-16 h-16 bg-brand-black" style="clip-path: polygon(100% 0, 0 100%, 100% 100%);"></div>
+                        <!-- Elemento decorativo sobre la imagen -->
+                        <div class="absolute bottom-10 left-10 z-20 pointer-events-none">
+                            <div class="font-racing text-[10rem] leading-none text-white/30 select-none drop-shadow-2xl italic">88</div>
+                        </div>
                     </div>
                     
-                    <div class="w-full lg:w-7/12 p-10 md:p-14 flex flex-col justify-center">
-                        <div class="flex items-center gap-4 mb-4">
-                            <h2 class="text-brand-red font-racing text-2xl uppercase tracking-widest">{{ $biography->title }}</h2>
-                            <div class="flex-grow h-[1px] bg-white/10"></div>
+                    <!-- Columna de Texto -->
+                    <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-20 flex flex-col justify-center relative">
+                        <!-- Línea conectora decorativa -->
+                        <div class="hidden lg:block absolute -left-8 top-1/2 transform -translate-y-1/2 w-16 h-[3px] bg-brand-red z-20 shadow-[0_0_15px_rgba(230,32,32,0.6)]"></div>
+                        
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-1 bg-brand-red"></div>
+                            <h2 class="text-brand-red font-racing text-2xl uppercase tracking-widest drop-shadow-md">{{ $biography->title }}</h2>
                         </div>
-                        <h3 class="text-5xl md:text-6xl font-racing mb-8 leading-none uppercase italic text-white">La velocidad en la sangre</h3>
-                        <div class="prose prose-invert prose-lg prose-p:text-gray-400 prose-p:leading-relaxed max-w-none font-light">
+                        
+                        <h3 class="text-5xl md:text-7xl font-racing mb-8 leading-none uppercase italic text-white drop-shadow-lg">El Piloto <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Detrás del Casco</span></h3>
+                        
+                        <div class="prose prose-invert prose-lg prose-p:text-gray-300 prose-p:leading-relaxed max-w-none font-light relative z-10">
                             {!! nl2br(e($biography->content)) !!}
+                        </div>
+                        
+                        <!-- Footer de Biografía decorativo -->
+                        <div class="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></div>
+                                <span class="text-brand-gray text-sm uppercase tracking-widest font-racing">Sangre de Campeón</span>
+                            </div>
+                            <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Firma" class="h-10 opacity-60 filter brightness-200">
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Estilo para el recorte de la imagen en desktop -->
+            <style>
+                @media (min-width: 1024px) {
+                    .lg\:clip-path-bio {
+                        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+                    }
+                }
+            </style>
             @endif
 
             <!-- Grid de Secciones Dinámicas -->
