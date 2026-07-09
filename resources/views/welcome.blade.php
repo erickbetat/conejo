@@ -163,24 +163,7 @@
             </div>
         </div>
 
-        @if(isset($partners) && $partners->count() > 0)
-        <!-- Partners en el Hero (Estilo F1 Moderno) -->
-        <div class="w-full border-t border-white/10 bg-brand-black/50 backdrop-blur-md relative z-20 mt-10">
-            <div class="max-w-7xl mx-auto px-6 py-6 flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                @foreach($partners as $partner)
-                    <div class="w-20 md:w-28 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0">
-                        @if($partner->url)
-                            <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer" class="block" title="{{ $partner->name }}">
-                                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-12">
-                            </a>
-                        @else
-                            <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-12" title="{{ $partner->name }}">
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        @endif
+
     </main>
 
     <!-- Estadísticas (Grid de Tarjetas) y Trayectoria -->
@@ -467,6 +450,52 @@
             </div>
         </div>
     </section>
+
+    @if(isset($partners) && $partners->count() > 0)
+    <!-- Sección de Colaboradores (Diseño Premium) -->
+    <section id="colaboradores" class="py-24 px-6 relative z-20 overflow-hidden bg-brand-black">
+        <!-- Fondos y destellos -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-red/10 via-brand-black to-brand-black opacity-60"></div>
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-red/50 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 relative">
+                <!-- Líneas decorativas de velocidad -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-1/4 h-[1px] bg-gradient-to-r from-transparent to-brand-red/40 transform -translate-y-1/2"></div>
+                <div class="hidden md:block absolute top-1/2 right-0 w-1/4 h-[1px] bg-gradient-to-l from-transparent to-brand-red/40 transform -translate-y-1/2"></div>
+                
+                <div class="inline-block px-6 py-2 border border-brand-red/30 bg-brand-red/5 text-brand-red text-sm font-bold uppercase tracking-widest rounded-full mb-6 shadow-[0_0_15px_rgba(230,32,32,0.1)]">Aliados Estratégicos</div>
+                <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-6 uppercase italic">Nuestros <span class="text-brand-red">Colaboradores</span></h2>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">Marcas e instituciones que hacen posible este sueño y aceleran junto a nosotros hacia la cima.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 justify-items-center">
+                @foreach($partners as $partner)
+                    <div class="w-full bg-brand-dark/40 backdrop-blur-sm border border-white/5 hover:border-brand-red/40 hover:bg-white/5 rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(230,32,32,0.15)] group relative overflow-hidden flex items-center justify-center min-h-[200px]">
+                        <!-- Destello de esquina -->
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-brand-red/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div class="w-full transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2 filter grayscale group-hover:grayscale-0 relative z-10 flex justify-center">
+                            @if($partner->url)
+                                <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer" class="block w-full flex justify-center">
+                                    <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-auto h-auto object-contain max-h-32 max-w-[85%] drop-shadow-lg">
+                                </a>
+                            @else
+                                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-auto h-auto object-contain max-h-32 max-w-[85%] drop-shadow-lg">
+                            @endif
+                        </div>
+                        
+                        <!-- Nombre en hover -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
+                            <span class="bg-brand-black border border-brand-red/50 text-white text-xs font-racing tracking-widest px-4 py-1.5 rounded-full uppercase whitespace-nowrap shadow-lg">{{ $partner->name }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!-- Footer -->
     <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-8 relative z-20">
