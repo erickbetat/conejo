@@ -76,7 +76,10 @@
     <!-- Menú de Navegación Flotante -->
     <nav class="fixed top-0 w-full z-50 bg-brand-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/" class="text-3xl font-racing text-brand-red tracking-wide italic uppercase">CANTÚ<span class="text-white">88</span></a>
+            <a href="/" class="flex items-center gap-3 transition-transform hover:scale-105">
+                <img src="{{ asset('images/logos/letrero-conejo2.png') }}" alt="Conejo Cantú" class="h-6 md:h-8 w-auto object-contain">
+                <img src="{{ asset('images/logos/logo1.png') }}" alt="Logo 88" class="h-10 md:h-12 w-auto object-contain">
+            </a>
             
             <div class="hidden md:flex items-center gap-8 font-medium">
                 <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
@@ -101,11 +104,11 @@
             <!-- Text Left -->
             <div class="p-8 md:p-12 animate-fade-in-up text-left">
                 <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                    PILOTO OFICIAL
+                    PILOTO DE KARTING
                 </div>
-                <h1 class="text-7xl md:text-9xl font-racing mb-2 tracking-wide uppercase italic leading-none drop-shadow-lg">
-                    CONEJO <br/><span class="text-brand-red racing-text inline-block mt-2">CANTÚ</span>
-                </h1>
+                <div class="mb-8 mt-2">
+                    <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Conejo Cantú" class="w-full max-w-[300px] md:max-w-md object-contain filter drop-shadow-[0_0_20px_rgba(230,32,32,0.3)] mx-auto md:mx-0">
+                </div>
                 <p class="text-brand-gray text-xl md:text-2xl mb-10 font-light uppercase tracking-widest h-16 md:h-10">
                     <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
                 </p>
@@ -173,15 +176,15 @@
                 
                 <!-- Tarjetas de Stats -->
                 <div class="bg-brand-dark border border-white/5 p-6 rounded-xl flex flex-col justify-center items-center hover:bg-white/5 transition-colors" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
-                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="121">0</span></div>
+                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="{{ $settings['stats_carreras']->value ?? '121' }}">0</span></div>
                     <div class="text-sm font-racing uppercase tracking-widest text-brand-red">Carreras</div>
                 </div>
                 <div class="bg-brand-dark border border-white/5 p-6 rounded-xl flex flex-col justify-center items-center hover:bg-white/5 transition-colors" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
-                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="78">0</span></div>
+                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="{{ $settings['stats_podios']->value ?? '78' }}">0</span></div>
                     <div class="text-sm font-racing uppercase tracking-widest text-brand-red">Podios</div>
                 </div>
                 <div class="bg-brand-dark border border-white/5 p-6 rounded-xl flex flex-col justify-center items-center hover:bg-white/5 transition-colors" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
-                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="10">0</span></div>
+                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="{{ $settings['stats_anios']->value ?? '10' }}">0</span></div>
                     <div class="text-sm font-racing uppercase tracking-widest text-brand-red">Años Exp.</div>
                 </div>
             </div>
@@ -375,7 +378,7 @@
                 <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,255,255,0.05)] rounded-2xl overflow-hidden relative group">
                     <div class="p-8 pb-0">
                         <h4 class="text-2xl font-racing uppercase text-gray-400 mb-1">Club Oro</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN 180<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
+                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_oro_price']->value ?? 180) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Únete al equipo. Tendrás acceso a noticias, beneficios y contenido exclusivo.</p>
@@ -398,7 +401,7 @@
                     
                     <div class="p-8 pb-0 relative z-10">
                         <h4 class="text-2xl font-racing uppercase text-brand-red mb-1">Club Titanio</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN 760<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
+                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_titanio_price']->value ?? 760) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
                         <p class="text-sm text-gray-300 mb-6 flex-grow font-light">Para los verdaderos fans que quieren llevar el apoyo al siguiente nivel.</p>
@@ -422,7 +425,7 @@
                 <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,215,0,0.1)] rounded-2xl overflow-hidden relative group">
                     <div class="p-8 pb-0">
                         <h4 class="text-2xl font-racing uppercase text-yellow-500 mb-1">Club Elite</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN 1,880<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
+                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_elite_price']->value ?? 1880) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <p class="text-sm text-gray-400 mb-6 flex-grow font-light">La experiencia definitiva de F1. Conviértete en parte integral de la carrera.</p>
@@ -446,12 +449,15 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-black border-t border-white/5 py-12 text-center text-brand-gray">
-        <p class="font-light">&copy; {{ date('Y') }} Conejo Cantú 88. Todos los derechos reservados.</p>
+    <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-8 relative z-20">
+        <div class="transition-transform hover:scale-105">
+            <img src="{{ asset('images/logos/logos-redes.png') }}" alt="Redes Sociales" class="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+        </div>
+        <p class="text-brand-gray font-light text-sm">&copy; {{ date('Y') }} Conejo Cantú 88. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Botón Flotante WhatsApp -->
-    <a href="https://wa.me/5211234567890?text=Hola%20Cristian,%20me%20interesa%20ser%20patrocinador/miembro%20de%20Conejo%20Club!" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] hover:-translate-y-1 transition-all duration-300 z-50 flex items-center justify-center group">
+    <a href="https://wa.me/{{ $settings['whatsapp_number']->value ?? '5211234567890' }}?text={{ urlencode($settings['whatsapp_message']->value ?? 'Hola Cristian') }}" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] hover:-translate-y-1 transition-all duration-300 z-50 flex items-center justify-center group">
         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
         </svg>
@@ -462,7 +468,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // --- Animación Typewriter ---
-            const textToType = "Piloto profesional de karting. Acompáñame hacia lo más alto del podio.";
+            const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de karting. Acompáñame hacia lo más alto del podio.' }}";
             const textElement = document.getElementById('typewriter-text');
             const buttonsElement = document.getElementById('hero-buttons');
             let typeIndex = 0;

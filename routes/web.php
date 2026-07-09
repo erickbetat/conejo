@@ -16,7 +16,8 @@ Route::get('/', function () {
     $biography = Biography::where('is_active', true)->first();
     $sections = Content::orderBy('sort_order', 'asc')->get();
     $partners = Partner::where('is_active', true)->orderBy('sort_order', 'asc')->get();
-    return view('welcome', compact('biography', 'sections', 'partners'));
+    $settings = \App\Models\Setting::all()->keyBy('key');
+    return view('welcome', compact('biography', 'sections', 'partners', 'settings'));
 });
 
 // Rutas de Administración
@@ -39,5 +40,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Aliados / Socios
         Route::resource('/partners', PartnerController::class)->except(['show']);
+        
+        // Configuraciones Generales
+        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
     });
 });
