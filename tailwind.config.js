@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Outfit', ...defaultTheme.fontFamily.sans],
+                racing: ['Teko', 'sans-serif'],
             },
             colors: {
                 brand: {

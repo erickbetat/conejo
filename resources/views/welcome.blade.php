@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Conejo Cantú 88 | Sitio Oficial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         /* Efecto Racing (Drive-in / Drive-out) */
@@ -74,12 +76,12 @@
     <!-- Menú de Navegación Flotante -->
     <nav class="fixed top-0 w-full z-50 bg-brand-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-black text-brand-red tracking-tighter italic">CANTÚ<span class="text-white">88</span></a>
+            <a href="/" class="text-3xl font-racing text-brand-red tracking-wide italic uppercase">CANTÚ<span class="text-white">88</span></a>
             
             <div class="hidden md:flex items-center gap-8 font-medium">
-                <a href="#biografia" class="text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-sm">Biografía</a>
-                <a href="#estadisticas" class="text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-sm">Estadísticas</a>
-                <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-6 py-2 rounded-full uppercase tracking-wider text-sm transition-all duration-300 shadow-[0_0_15px_rgba(230,32,32,0.3)] hover:scale-105">Unirme al Club</a>
+                <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
+                <a href="#estadisticas" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Estadísticas</a>
+                <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 shadow-[0_0_15px_rgba(230,32,32,0.3)] hover:scale-105" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme al Club</a>
             </div>
             
             <!-- Menú Móvil Simple -->
@@ -90,230 +92,353 @@
     </nav>
 
     <!-- Hero Section -->
-    <main class="relative flex-grow flex items-center justify-center min-h-[90vh] pt-20 px-6 overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-red/20 via-brand-black to-brand-black -z-10"></div>
+    <main class="relative flex-grow flex flex-col justify-center min-h-[90vh] pt-24 px-6 overflow-hidden bg-brand-black">
+        <!-- Background Elements: Softer gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-red/10 via-brand-black to-brand-black z-0"></div>
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 z-0"></div>
         
-        <div class="glass-panel p-8 md:p-14 max-w-4xl text-center relative z-10 animate-fade-in-up overflow-hidden">
-            <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter drop-shadow-2xl">
-                CONEJO <span class="text-brand-red racing-text">CANTÚ</span>
-            </h1>
-            <p class="text-brand-gray text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-light h-16 md:h-10">
-                <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 translate-y-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
-                <a href="#biografia" class="bg-white text-brand-black hover:bg-gray-200 font-bold py-4 px-10 rounded-full uppercase tracking-wider transition-all duration-300 hover:scale-105">
-                    Conoce mi historia
-                </a>
-                <a href="#" class="bg-brand-red hover:bg-brand-red-hover text-white font-bold py-4 px-10 rounded-full uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(230,32,32,0.4)] hover:shadow-[0_0_30px_rgba(230,32,32,0.6)] hover:scale-105">
-                    Apoyar al Piloto
-                </a>
-            </div>
-        </div>
-    </main>
-
-    <!-- Biografía Section -->
-    <section id="biografia" class="pt-32 pb-24 px-6 relative bg-brand-dark">
-        <div class="max-w-7xl mx-auto">
-            @if($biography)
-                <div class="flex flex-col lg:flex-row gap-16 items-center">
-                    
-                    <!-- Imagen de la Biografía -->
-                    <div class="w-full lg:w-1/2">
-                        @if($biography->image_path)
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-                                <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay z-10 group-hover:bg-transparent transition-all duration-500"></div>
-                                <img src="{{ asset('storage/' . $biography->image_path) }}" alt="{{ $biography->title }}" class="w-full h-auto object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out transform group-hover:scale-105">
-                                <!-- Red accent line -->
-                                <div class="absolute bottom-0 left-0 w-full h-2 bg-brand-red z-20"></div>
-                            </div>
-                        @else
-                            <div class="aspect-[3/4] bg-brand-black rounded-2xl flex items-center justify-center border border-white/5 shadow-2xl">
-                                <span class="text-brand-gray text-xl font-light">Foto no disponible</span>
-                            </div>
-                        @endif
-                    </div>
-
-                    <!-- Texto de la Biografía -->
-                    <div class="w-full lg:w-1/2">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="w-12 h-1 bg-brand-red"></div>
-                            <h2 class="text-brand-red font-bold uppercase tracking-widest">{{ $biography->title }}</h2>
-                        </div>
-                        
-                        <h3 class="text-4xl md:text-5xl font-black mb-8 leading-tight">La velocidad en la sangre</h3>
-                        
-                        <div class="prose prose-invert prose-lg prose-p:text-gray-300 prose-p:leading-relaxed max-w-none">
-                            {!! nl2br(e($biography->content)) !!}
-                        </div>
-                    </div>
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 flex-grow">
+            <!-- Text Left -->
+            <div class="p-8 md:p-12 animate-fade-in-up text-left">
+                <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+                    PILOTO OFICIAL
                 </div>
-            @else
-                <div class="text-center py-20">
-                    <h2 class="text-3xl font-bold text-brand-gray mb-4">Aún no hay biografía disponible</h2>
-                    <p class="text-gray-500">El administrador está preparando esta sección.</p>
+                <h1 class="text-7xl md:text-9xl font-racing mb-2 tracking-wide uppercase italic leading-none drop-shadow-lg">
+                    CONEJO <br/><span class="text-brand-red racing-text inline-block mt-2">CANTÚ</span>
+                </h1>
+                <p class="text-brand-gray text-xl md:text-2xl mb-10 font-light uppercase tracking-widest h-16 md:h-10">
+                    <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 opacity-0 translate-y-4 pt-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
+                    <a href="#suscripciones" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto">
+                        <div class="absolute inset-0 bg-brand-red skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-red-700 shadow-[0_0_20px_rgba(230,32,32,0.3)] group-hover:shadow-[0_0_30px_rgba(230,32,32,0.5)]"></div>
+                        <span class="relative mt-1">Apoyar al Piloto</span>
+                    </a>
+                    <a href="#biografia" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0">
+                        <div class="absolute inset-0 bg-white/5 border border-white/20 skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-white/10"></div>
+                        <span class="relative mt-1">Conocer Más</span>
+                    </a>
                 </div>
-            @endif
-        </div>
-    </section>
-
-    <!-- Secciones Dinámicas -->
-    @foreach($sections as $index => $section)
-        @php
-            $bgClass = ($index % 2 == 0) ? 'bg-brand-black' : 'bg-brand-dark';
-            $align = $section->image_alignment ?? 'left';
-        @endphp
-        
-        <section class="py-24 px-6 relative {{ $bgClass }} overflow-hidden">
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="flex items-center gap-4 mb-12 {{ $align == 'top' ? 'justify-center' : '' }}">
-                    <div class="w-12 h-1 bg-brand-red"></div>
-                    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-widest text-white">{{ $section->title }}</h2>
-                </div>
-
-                <div class="relative">
-                    <div class="flex {{ $align == 'top' ? 'flex-col items-center' : 'flex-col lg:flex-row' }} gap-12">
-                        @if($section->image_path)
-                            <div class="w-full {{ $align == 'top' ? 'max-w-4xl mb-6' : 'lg:w-1/2' }} {{ $align == 'right' ? 'order-1 lg:order-2' : 'order-1' }}">
-                                <div class="rounded-2xl overflow-hidden shadow-2xl relative">
-                                    <img src="{{ asset('storage/' . $section->image_path) }}" alt="{{ $section->title }}" class="w-full h-auto object-cover {{ $align == 'top' ? 'max-h-[600px]' : '' }}">
-                                </div>
-                            </div>
-                        @endif
-                        
-                        <div class="w-full {{ ($section->image_path && $align != 'top') ? 'lg:w-1/2' : '' }} {{ $align == 'right' ? 'order-2 lg:order-1' : 'order-2' }}">
-                            <div class="prose prose-invert prose-lg prose-p:text-gray-300 prose-p:leading-relaxed max-w-none {{ $align == 'top' ? 'text-center mx-auto' : '' }}">
-                                {!! nl2br(e($section->body)) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endforeach
-
-    <!-- Estadísticas Animadas -->
-    <section id="estadisticas" class="py-20 px-6 bg-brand-red text-white relative">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center" id="stats-container">
-                <div class="stat-item">
-                    <div class="text-6xl md:text-7xl font-black mb-2 tracking-tighter drop-shadow-md">
-                        <span class="counter" data-target="156">0</span>+
-                    </div>
-                    <div class="text-xl font-bold uppercase tracking-widest text-white/80">Carreras Corridas</div>
-                </div>
-                <div class="stat-item">
-                    <div class="text-6xl md:text-7xl font-black mb-2 tracking-tighter drop-shadow-md">
-                        <span class="counter" data-target="42">0</span>
-                    </div>
-                    <div class="text-xl font-bold uppercase tracking-widest text-white/80">Podios Obtenidos</div>
-                </div>
-                <div class="stat-item">
-                    <div class="text-6xl md:text-7xl font-black mb-2 tracking-tighter drop-shadow-md">
-                        <span class="counter" data-target="8">0</span>
-                    </div>
-                    <div class="text-xl font-bold uppercase tracking-widest text-white/80">Años de Experiencia</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    @if(isset($partners) && $partners->count() > 0)
-    <!-- Aliados Estratégicos -->
-    <section id="aliados" class="py-20 px-6 bg-brand-dark relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-black tracking-widest text-white mb-4">Mis <span class="text-brand-red">Aliados</span></h2>
-                <p class="text-brand-gray text-xl max-w-2xl mx-auto font-light">Gracias a las empresas e instituciones que hacen posible este sueño.</p>
             </div>
             
-            <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
+            <!-- Image Placeholder Right -->
+            <div class="hidden lg:flex justify-center items-end h-[80vh] relative animate-fade-in-up" style="animation-delay: 0.3s;">
+                <!-- Efecto de resplandor detrás del piloto -->
+                <div class="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full z-0"></div>
+                <div class="w-full h-full bg-gradient-to-t from-brand-black via-transparent to-transparent absolute bottom-0 left-0 z-20"></div>
+                
+                <div class="text-white/5 font-racing text-[15rem] absolute -right-10 top-10 select-none z-0 leading-none">88</div>
+                
+                <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
+                <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
+                    <span class="text-white/40 font-racing text-3xl uppercase tracking-widest text-center px-4">Foto del Piloto<br/><span class="text-sm">(Fondo Transparente)</span></span>
+                </div>
+            </div>
+        </div>
+
+        @if(isset($partners) && $partners->count() > 0)
+        <!-- Partners en el Hero (Estilo F1 Moderno) -->
+        <div class="w-full border-t border-white/10 bg-brand-black/50 backdrop-blur-md relative z-20 mt-10">
+            <div class="max-w-7xl mx-auto px-6 py-6 flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-500">
                 @foreach($partners as $partner)
-                    <div class="w-32 md:w-48 transition-transform duration-300 hover:scale-110 filter grayscale hover:grayscale-0 opacity-70 hover:opacity-100">
+                    <div class="w-20 md:w-28 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0">
                         @if($partner->url)
                             <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer" class="block" title="{{ $partner->name }}">
-                                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-24">
+                                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-12">
                             </a>
                         @else
-                            <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-24" title="{{ $partner->name }}">
+                            <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-full h-auto object-contain max-h-12" title="{{ $partner->name }}">
                         @endif
                     </div>
                 @endforeach
             </div>
         </div>
-    </section>
-    @endif
+        @endif
+    </main>
 
-    <!-- Opciones de Suscripción -->
-    <section id="suscripciones" class="py-24 px-6 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] bg-brand-black relative">
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-black to-transparent opacity-90"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black tracking-widest text-white mb-4">Opciones de <span class="text-brand-red">Suscripción</span></h2>
-                <p class="text-brand-gray text-xl max-w-2xl mx-auto font-light">Únete a Conejo Club. Sé parte de esta historia. ¡¡¡Vamos juntos a la Fórmula 1!!!</p>
+    <!-- Estadísticas (Grid de Tarjetas) y Trayectoria -->
+    <section id="estadisticas" class="py-16 px-6 bg-brand-black relative z-20 border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Tarjetas Superiores -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12" id="stats-container">
+                <!-- Tarjeta Principal (Número) -->
+                <div class="bg-brand-red text-white p-6 rounded-xl flex items-center justify-center shadow-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
+                    <div class="text-8xl font-racing italic leading-none mr-4">88</div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-racing uppercase tracking-widest leading-tight">Conejo</span>
+                        <span class="text-3xl font-racing uppercase tracking-widest leading-tight">Cantú</span>
+                    </div>
+                </div>
+                
+                <!-- Tarjetas de Stats -->
+                <div class="bg-brand-dark border border-white/5 p-6 rounded-xl flex flex-col justify-center items-center hover:bg-white/5 transition-colors" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
+                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="121">0</span></div>
+                    <div class="text-sm font-racing uppercase tracking-widest text-brand-red">Carreras</div>
+                </div>
+                <div class="bg-brand-dark border border-white/5 p-6 rounded-xl flex flex-col justify-center items-center hover:bg-white/5 transition-colors" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
+                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="78">0</span></div>
+                    <div class="text-sm font-racing uppercase tracking-widest text-brand-red">Podios</div>
+                </div>
+                <div class="bg-brand-dark border border-white/5 p-6 rounded-xl flex flex-col justify-center items-center hover:bg-white/5 transition-colors" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);">
+                    <div class="text-5xl font-racing mb-1 italic text-white"><span class="counter" data-target="10">0</span></div>
+                    <div class="text-sm font-racing uppercase tracking-widest text-brand-red">Años Exp.</div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto group-cards">
+            <!-- Detalle de Trayectoria (Grid List) -->
+            <div class="bg-brand-dark border border-white/5 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);">
+                <!-- Efecto de fondo sutil -->
+                <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-red/5 to-transparent z-0"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-8 border-b border-white/10 pb-6">
+                        <div class="w-2 h-8 bg-brand-red rounded-sm"></div>
+                        <h3 class="text-4xl font-racing uppercase tracking-widest text-white italic">Trayectoria <span class="text-brand-red">Oficial</span></h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                        <!-- Columna Izquierda -->
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform">#1</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">Fórmula 4 México</div>
+                            </div>
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform">#2</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">Fórmula 4 Latinoamérica</div>
+                            </div>
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform">#6</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">MUNDIAL Fórmula 4 <span class="text-gray-500 text-sm ml-1">(Rusia)</span></div>
+                            </div>
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform">#5</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">Mundial e-Karting <span class="text-gray-500 text-sm ml-1">(Portugal)</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Columna Derecha -->
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform italic">3x</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">Campeón Nacional Karting</div>
+                            </div>
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform italic">3x</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">Subcampeón Nacional Karting</div>
+                            </div>
+                            <div class="flex items-start gap-5 group">
+                                <div class="text-brand-red font-racing text-4xl leading-none w-12 group-hover:scale-110 transition-transform">🏁</div>
+                                <div class="text-gray-300 font-light text-lg pt-1">
+                                    3 mundiales y 2 centro-sudamericanos (#2 y #4)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Premios Especiales (Fila completa) -->
+                        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 pt-8 border-t border-white/5">
+                            <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-colors">
+                                <div class="flex items-center gap-4 mb-2">
+                                    <span class="text-3xl">🏆</span>
+                                    <h4 class="text-xl font-racing uppercase tracking-widest text-white">Casco de Plata 2023</h4>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light pl-[3.25rem]">Premio al mejor piloto Mexicano de Karting.</p>
+                            </div>
+                            
+                            <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-colors relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-16 h-16 bg-brand-red/10 rounded-full blur-xl"></div>
+                                <div class="flex items-center gap-4 mb-2">
+                                    <span class="text-3xl">🌎</span>
+                                    <h4 class="text-xl font-racing uppercase tracking-widest text-white">FIA América Awards 2023</h4>
+                                </div>
+                                <p class="text-sm text-gray-400 font-light pl-[3.25rem]">Único Mexicano ganador (se entrega 1 al año). Entregado en Panamá.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrera Destacada (Estilo Widget Retrospectivo) -->
+    <section id="carrera-destacada" class="py-20 px-6 bg-brand-black relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-2 h-8 bg-brand-red rounded-sm"></div>
+                <h2 class="text-4xl md:text-5xl font-racing tracking-widest text-white uppercase italic">Carrera <span class="text-brand-red">Destacada</span></h2>
+            </div>
+            
+            <div class="bg-brand-dark border border-brand-red/20 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(230,32,32,0.1)] relative">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-brand-red/50 to-transparent"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="p-10 md:col-span-2 flex flex-col justify-center">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <div class="inline-block px-3 py-1 bg-brand-red text-white text-xs font-bold uppercase tracking-widest rounded-md w-max shadow-lg shadow-brand-red/30">1er Lugar</div>
+                            <div class="inline-block px-3 py-1 bg-white/10 text-brand-gray text-xs font-bold uppercase tracking-widest rounded-md w-max border border-white/5">Fórmula 4 México</div>
+                        </div>
+                        <h3 class="text-5xl md:text-6xl font-racing text-white uppercase italic mb-2 leading-none">Gran Premio Ciudad de México</h3>
+                        <p class="text-brand-gray text-xl uppercase tracking-widest mb-6">Autódromo Hermanos Rodríguez</p>
+                        
+                        <p class="text-gray-400 font-light max-w-xl mb-8">Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio en el circuito más emblemático del país, frente a miles de aficionados al automovilismo.</p>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">Pos:</span> P1</div>
+                            <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">V. Rápida:</span> Récord Pista</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/5 border-l border-white/5 p-10 flex flex-col items-center justify-center relative overflow-hidden min-h-[250px] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+                        <!-- Red glow effect -->
+                        <div class="absolute inset-0 bg-brand-red/10 mix-blend-overlay"></div>
+                        <div class="absolute w-32 h-32 bg-brand-red rounded-full blur-[60px] opacity-20"></div>
+                        
+                        <!-- Trophy Graphic -->
+                        <div class="text-[8rem] leading-none transform rotate-12 filter drop-shadow-2xl z-10 select-none">🏆</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biografía & Secciones Dinámicas (Grid Híbrido) -->
+    <section id="biografia" class="py-20 px-6 relative bg-brand-black">
+        <div class="max-w-7xl mx-auto space-y-12">
+            
+            @if($biography)
+            <!-- Tarjeta de Biografía -->
+            <div class="bg-brand-dark border border-white/5 rounded-2xl overflow-hidden">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="w-full lg:w-5/12 relative min-h-[400px]">
+                        @if($biography->image_path)
+                            <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay z-10 transition-all duration-500 hover:bg-transparent"></div>
+                            <img src="{{ asset('storage/' . $biography->image_path) }}" alt="{{ $biography->title }}" class="absolute inset-0 w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700">
+                        @else
+                            <div class="absolute inset-0 bg-black flex items-center justify-center">
+                                <span class="text-brand-gray font-light">Sin Imagen</span>
+                            </div>
+                        @endif
+                        <div class="absolute bottom-0 right-0 w-16 h-16 bg-brand-black" style="clip-path: polygon(100% 0, 0 100%, 100% 100%);"></div>
+                    </div>
+                    
+                    <div class="w-full lg:w-7/12 p-10 md:p-14 flex flex-col justify-center">
+                        <div class="flex items-center gap-4 mb-4">
+                            <h2 class="text-brand-red font-racing text-2xl uppercase tracking-widest">{{ $biography->title }}</h2>
+                            <div class="flex-grow h-[1px] bg-white/10"></div>
+                        </div>
+                        <h3 class="text-5xl md:text-6xl font-racing mb-8 leading-none uppercase italic text-white">La velocidad en la sangre</h3>
+                        <div class="prose prose-invert prose-lg prose-p:text-gray-400 prose-p:leading-relaxed max-w-none font-light">
+                            {!! nl2br(e($biography->content)) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            <!-- Grid de Secciones Dinámicas -->
+            @if($sections->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
+                @foreach($sections as $index => $section)
+                    <div class="bg-brand-dark border border-white/5 rounded-2xl overflow-hidden flex flex-col hover:border-white/10 transition-colors group">
+                        @if($section->image_path)
+                            <div class="w-full h-64 relative overflow-hidden">
+                                <img src="{{ asset('storage/' . $section->image_path) }}" alt="{{ $section->title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        @endif
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h2 class="text-3xl font-racing uppercase tracking-widest text-white mb-4 italic">{{ $section->title }}</h2>
+                            <div class="prose prose-invert prose-p:text-gray-400 prose-sm flex-grow">
+                                {!! nl2br(e($section->body)) !!}
+                            </div>
+                        </div>
+                        <div class="h-1 w-0 bg-brand-red group-hover:w-full transition-all duration-500"></div>
+                    </div>
+                @endforeach
+            </div>
+            @endif
+        </div>
+    </section>
+
+    <!-- Opciones de Suscripción (Tarjetas Fusión) -->
+    <section id="suscripciones" class="py-24 px-6 bg-brand-black relative">
+        <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_bottom_center,_var(--tw-gradient-stops))] from-brand-red/20 via-transparent to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-1 border border-white/10 text-brand-gray text-sm font-bold uppercase tracking-widest rounded-full mb-4">Membresías</div>
+                <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-4 uppercase italic">Conejo <span class="text-brand-red">Club</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Club Oro -->
-                <div class="bg-white text-brand-black rounded-lg overflow-hidden flex flex-col shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                    <div class="bg-gray-100 p-8 flex justify-center items-center border-b border-gray-200">
-                        <h3 class="text-4xl font-black text-brand-red tracking-tighter italic">CANTÚ<span class="text-brand-black">88</span></h3>
+                <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,255,255,0.05)] rounded-2xl overflow-hidden relative group">
+                    <div class="p-8 pb-0">
+                        <h4 class="text-2xl font-racing uppercase text-gray-400 mb-1">Club Oro</h4>
+                        <div class="font-racing text-5xl text-white mb-2">MXN 180<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
-                        <h4 class="text-2xl font-bold mb-1">Club Oro</h4>
-                        <div class="font-black text-3xl mb-6">MXN 180 <span class="text-sm text-gray-500 font-normal">/ mes</span></div>
-                        <a href="#" class="block text-center w-full bg-brand-black text-white font-bold py-3 rounded hover:bg-brand-red transition-colors mb-6">Registrarse</a>
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Únete al equipo. Tendrás acceso a noticias, beneficios y contenido exclusivo.</p>
                         
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-4">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.</p>
-                        
-                        <ul class="space-y-3 mt-4 text-sm font-medium flex-grow">
-                            <li class="flex items-start gap-2">
-                                <span class="text-brand-red mt-1">•</span> Acceso a contenido exclusivo
+                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red"></div>
+                                Contenido exclusivo
                             </li>
                         </ul>
+                        
+                        <a href="#" class="block text-center w-full bg-white/5 border border-white/10 text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-white hover:text-black rounded-xl">Unirse a Oro</a>
                     </div>
                 </div>
 
-                <!-- Club Titanio -->
-                <div class="bg-white text-brand-black rounded-lg overflow-hidden flex flex-col shadow-[0_0_20px_rgba(230,32,32,0.2)] relative transform md:-translate-y-4 border-2 border-brand-red transition-all duration-300 hover:-translate-y-6 hover:shadow-[0_0_40px_rgba(230,32,32,0.4)]">
-                    <div class="bg-brand-black text-white text-xs font-bold text-center py-2 uppercase tracking-widest">Lo Más Popular</div>
-                    <div class="bg-gray-100 p-8 flex justify-center items-center border-b border-gray-200">
-                        <h3 class="text-4xl font-black text-brand-red tracking-tighter italic">CANTÚ<span class="text-brand-black">88</span></h3>
+                <!-- Club Titanio (Popular) -->
+                <div class="bg-brand-dark border border-brand-red flex flex-col shadow-[0_0_30px_rgba(230,32,32,0.15)] transition-all duration-300 hover:-translate-y-4 hover:shadow-[0_10px_50px_rgba(230,32,32,0.25)] rounded-2xl overflow-hidden relative md:-mt-4 md:mb-4 group">
+                    <div class="absolute top-0 right-0 bg-brand-red text-white text-xs font-bold px-4 py-1 rounded-bl-lg uppercase tracking-widest z-10">Más Popular</div>
+                    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-brand-red/20 to-transparent"></div>
+                    
+                    <div class="p-8 pb-0 relative z-10">
+                        <h4 class="text-2xl font-racing uppercase text-brand-red mb-1">Club Titanio</h4>
+                        <div class="font-racing text-5xl text-white mb-2">MXN 760<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <h4 class="text-2xl font-bold mb-1">Club Titanio</h4>
-                        <div class="font-black text-3xl mb-6">MXN 760 <span class="text-sm text-gray-500 font-normal">/ mes</span></div>
-                        <a href="#" class="block text-center w-full bg-brand-black text-white font-bold py-3 rounded hover:bg-brand-red transition-colors mb-6">Registrarse</a>
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <p class="text-sm text-gray-300 mb-6 flex-grow font-light">Para los verdaderos fans que quieren llevar el apoyo al siguiente nivel.</p>
                         
-                        <p class="text-sm text-gray-600 mb-4">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.</p>
-                        
-                        <div class="text-sm font-bold italic mb-3">Incluye todo Club Oro +:</div>
-                        <ul class="space-y-3 text-sm font-medium flex-grow">
-                            <li class="flex items-start gap-2">
-                                <span class="text-brand-red mt-1">•</span> + Descuentos en merch oficial
+                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red"></div>
+                                Todo lo de Club Oro
+                            </li>
+                            <li class="flex items-center gap-3 font-medium text-white">
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red"></div>
+                                Descuentos en merch oficial
                             </li>
                         </ul>
+                        
+                        <a href="#" class="block text-center w-full bg-brand-red text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-red-700 rounded-xl shadow-[0_0_15px_rgba(230,32,32,0.4)]">Unirse a Titanio</a>
                     </div>
                 </div>
 
                 <!-- Club Elite -->
-                <div class="bg-white text-brand-black rounded-lg overflow-hidden flex flex-col shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(230,190,32,0.3)]">
-                    <div class="bg-gray-100 p-8 flex justify-center items-center border-b border-gray-200">
-                        <h3 class="text-4xl font-black text-brand-red tracking-tighter italic">CANTÚ<span class="text-brand-black">88</span></h3>
+                <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,215,0,0.1)] rounded-2xl overflow-hidden relative group">
+                    <div class="p-8 pb-0">
+                        <h4 class="text-2xl font-racing uppercase text-yellow-500 mb-1">Club Elite</h4>
+                        <div class="font-racing text-5xl text-white mb-2">MXN 1,880<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
-                        <h4 class="text-2xl font-bold mb-1">Club Elite</h4>
-                        <div class="font-black text-3xl mb-6">MXN 1,880 <span class="text-sm text-gray-500 font-normal">/ mes</span></div>
-                        <a href="#" class="block text-center w-full bg-brand-black text-white font-bold py-3 rounded hover:bg-brand-red transition-colors mb-6">Registrarse</a>
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">La experiencia definitiva de F1. Conviértete en parte integral de la carrera.</p>
                         
-                        <p class="text-sm text-gray-600 mb-4">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.</p>
-                        
-                        <div class="text-sm font-bold italic mb-3">Incluye todo Club Oro y Club Titanio +:</div>
-                        <ul class="space-y-3 text-sm font-medium flex-grow">
-                            <li class="flex items-start gap-2 font-bold">
-                                <span class="text-brand-red mt-1">•</span> + Convivencia VIP con el piloto
+                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red"></div>
+                                Todo lo de Club Titanio
+                            </li>
+                            <li class="flex items-center gap-3 font-medium text-yellow-500">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+                                Convivencia VIP con el piloto
                             </li>
                         </ul>
+                        
+                        <a href="#" class="block text-center w-full bg-white/5 border border-yellow-500/30 text-yellow-500 font-racing text-xl uppercase py-3 transition-all hover:bg-yellow-500 hover:text-black rounded-xl">Unirse a Elite</a>
                     </div>
                 </div>
             </div>
