@@ -83,7 +83,13 @@
             
             <div class="hidden md:flex items-center gap-8 font-medium">
                 <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
-                <a href="#estadisticas" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Estadísticas</a>
+                <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
+                
+                <!-- Redes Sociales -->
+                <a href="#" class="transition-transform hover:scale-110 border-l border-white/20 pl-8 ml-2 flex items-center">
+                    <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-6 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </a>
+
                 <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 shadow-[0_0_15px_rgba(230,32,32,0.3)] hover:scale-105" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme al Club</a>
             </div>
             
@@ -134,7 +140,7 @@
                 
                 <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
                 <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
-                    <span class="text-white/40 font-racing text-3xl uppercase tracking-widest text-center px-4">Foto del Piloto<br/><span class="text-sm">(Fondo Transparente)</span></span>
+                    <img src="{{ asset('images/Cara Concentrado.jpg') }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                 </div>
             </div>
         </div>
@@ -167,11 +173,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12" id="stats-container">
                 <!-- Tarjeta Principal (Número) -->
                 <div class="bg-brand-red text-white p-6 rounded-xl flex items-center justify-center shadow-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
-                    <div class="text-8xl font-racing italic leading-none mr-4">88</div>
-                    <div class="flex flex-col">
-                        <span class="text-xl font-racing uppercase tracking-widest leading-tight">Conejo</span>
-                        <span class="text-3xl font-racing uppercase tracking-widest leading-tight">Cantú</span>
-                    </div>
+                    <img src="{{ asset('images/logos/logo3-blanco.png') }}" alt="Conejo Cantú Logo" class="max-h-20 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300">
                 </div>
                 
                 <!-- Tarjetas de Stats -->
@@ -549,6 +551,31 @@
             if (statsContainer) {
                 observer.observe(statsContainer);
             }
+
+            // --- Animaciones al hacer Scroll (Reveal suave) ---
+            // Seleccionamos elementos clave como secciones, tarjetas y componentes del grid
+            const revealElements = document.querySelectorAll('section > div > h2, .bg-brand-dark, footer');
+            
+            // Les aplicamos las clases iniciales ocultas (Tailwind)
+            revealElements.forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-1000', 'ease-out');
+            });
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Agregamos un ligero retraso escalonado para elementos que aparecen al mismo tiempo
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-10');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }, index * 100); 
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.15 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
         });
     </script>
 </body>
