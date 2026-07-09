@@ -66,6 +66,24 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
+        /* Animaciones Adicionales */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 3s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(230,32,32,0.3); }
+            50% { box-shadow: 0 0 35px rgba(230,32,32,0.6); }
+            100% { box-shadow: 0 0 15px rgba(230,32,32,0.3); }
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen bg-brand-black text-white antialiased selection:bg-brand-red selection:text-white">
@@ -86,11 +104,11 @@
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
                 
                 <!-- Redes Sociales -->
-                <a href="#" class="transition-transform hover:scale-110 border-l border-white/20 pl-8 ml-2 flex items-center">
+                <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-110 border-l border-white/20 pl-8 ml-2 flex items-center">
                     <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-6 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
                 </a>
 
-                <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 shadow-[0_0_15px_rgba(230,32,32,0.3)] hover:scale-105" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme al Club</a>
+                <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 pulse-glow" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme al Club</a>
             </div>
             
             <!-- Menú Móvil Simple -->
@@ -119,8 +137,8 @@
                     <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 opacity-0 translate-y-4 pt-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
-                    <a href="#suscripciones" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto">
-                        <div class="absolute inset-0 bg-brand-red skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-red-700 shadow-[0_0_20px_rgba(230,32,32,0.3)] group-hover:shadow-[0_0_30px_rgba(230,32,32,0.5)]"></div>
+                    <a href="#suscripciones" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto pulse-glow">
+                        <div class="absolute inset-0 bg-brand-red skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-red-700"></div>
                         <span class="relative mt-1">Apoyar al Piloto</span>
                     </a>
                     <a href="#biografia" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0">
@@ -139,7 +157,7 @@
                 <div class="text-white/5 font-racing text-[15rem] absolute -right-10 top-10 select-none z-0 leading-none">88</div>
                 
                 <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
-                <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
+                <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
                     <img src="{{ asset('images/Cara Concentrado.jpg') }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                 </div>
             </div>
@@ -172,7 +190,7 @@
             <!-- Tarjetas Superiores -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12" id="stats-container">
                 <!-- Tarjeta Principal (Número) -->
-                <div class="bg-brand-red text-white p-6 rounded-xl flex items-center justify-center shadow-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
+                <div class="bg-brand-red text-white p-6 rounded-xl flex items-center justify-center pulse-glow" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);">
                     <img src="{{ asset('images/logos/logo3-blanco.png') }}" alt="Conejo Cantú Logo" class="max-h-20 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300">
                 </div>
                 
@@ -452,9 +470,9 @@
 
     <!-- Footer -->
     <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-8 relative z-20">
-        <div class="transition-transform hover:scale-105">
-            <img src="{{ asset('images/logos/logos-redes.png') }}" alt="Redes Sociales" class="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
-        </div>
+        <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-105">
+            <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+        </a>
         <p class="text-brand-gray font-light text-sm">&copy; {{ date('Y') }} Conejo Cantú 88. Todos los derechos reservados.</p>
     </footer>
 
@@ -466,8 +484,84 @@
         <span class="absolute right-14 bg-black text-white text-xs px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Hablar con el Equipo</span>
     </a>
 
+    <!-- Modal Redes Sociales -->
+    <div id="social-modal" class="fixed inset-0 hidden items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm bg-black/60" style="z-index: 9999;">
+        <div class="bg-brand-dark border border-brand-red rounded-xl p-8 w-full mx-4 transform scale-95 transition-transform duration-300 shadow-[0_0_40px_rgba(230,32,32,0.15)] relative" style="max-width: 400px;">
+            <button onclick="closeSocialModal()" class="absolute top-4 right-4 text-brand-gray hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-3xl font-racing text-center mb-6 italic text-white uppercase tracking-widest">Sigue a <span class="text-brand-red">Cristian</span></h3>
+            
+            <div class="space-y-4">
+                <a href="https://instagram.com/conejocantu" target="_blank" class="flex items-center gap-4 bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors border border-white/5 hover:border-brand-red/50 group">
+                    <div class="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </div>
+                    <span class="font-racing text-xl text-white tracking-widest group-hover:text-brand-red transition-colors">Instagram</span>
+                </a>
+                
+                <a href="https://facebook.com/conejocantu" target="_blank" class="flex items-center gap-4 bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors border border-white/5 hover:border-brand-red/50 group">
+                    <div class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </div>
+                    <span class="font-racing text-xl text-white tracking-widest group-hover:text-brand-red transition-colors">Facebook</span>
+                </a>
+                
+                <a href="https://youtube.com/c/conejocantu" target="_blank" class="flex items-center gap-4 bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors border border-white/5 hover:border-brand-red/50 group">
+                    <div class="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </div>
+                    <span class="font-racing text-xl text-white tracking-widest group-hover:text-brand-red transition-colors">YouTube</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Script de Animaciones y UX -->
     <script>
+        // --- Modal de Redes Sociales ---
+        function openSocialModal(e) {
+            if(e) e.preventDefault();
+            const modal = document.getElementById('social-modal');
+            const inner = modal.children[0];
+            
+            // Primero mostramos el div (display: flex)
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Un pequeño retraso permite que la transición CSS de opacidad funcione
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                inner.classList.remove('scale-95');
+                inner.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeSocialModal() {
+            const modal = document.getElementById('social-modal');
+            const inner = modal.children[0];
+            
+            // Primero iniciamos la transición de desaparición
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            inner.classList.remove('scale-100');
+            inner.classList.add('scale-95');
+            
+            // Esperamos a que termine la transición (300ms) para ocultarlo del DOM
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Cerrar modal al clickear fuera
+        document.getElementById('social-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSocialModal();
+            }
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
             // --- Animación Typewriter ---
             const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de karting. Acompáñame hacia lo más alto del podio.' }}";
