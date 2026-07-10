@@ -62,6 +62,35 @@ class BiographyController extends Controller
                 $biography->image_path = $path;
             }
         }
+        
+        // Manejar fotos del timeline
+        for ($i = 1; $i <= 3; $i++) {
+            $descField = 'desc_' . $i;
+            $photoField = 'photo_' . $i;
+            
+            $biography->$descField = $request->$descField;
+            
+            if ($request->hasFile($photoField)) {
+                // Eliminar foto anterior si existe
+                if ($biography->$photoField && Storage::disk('public')->exists($biography->$photoField)) {
+                    Storage::disk('public')->delete($biography->$photoField);
+                }
+                
+                $file = $request->file($photoField);
+                try {
+                    $filename = 'biography/timeline_' . $i . '_' . uniqid() . '.webp';
+                    $manager = new ImageManager(new Driver());
+                    $image = $manager->read($file);
+                    $image->scaleDown(width: 800); 
+                    $encoded = $image->toWebp(80);
+                    Storage::disk('public')->put($filename, (string) $encoded);
+                    $biography->$photoField = $filename;
+                } catch (Throwable $e) {
+                    $path = $file->store('biography', 'public');
+                    $biography->$photoField = $path;
+                }
+            }
+        }
 
         $biography->save();
 

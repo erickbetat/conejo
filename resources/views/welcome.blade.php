@@ -129,7 +129,7 @@
             <!-- Text Left -->
             <div class="p-8 md:p-12 animate-fade-in-up text-left">
                 <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                    PILOTO DE KARTING
+                    PILOTO DE FORMULA 3
                 </div>
                 <div class="mb-8 mt-2">
                     <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Conejo Cantú" class="w-full max-w-[300px] md:max-w-md object-contain filter drop-shadow-[0_0_20px_rgba(230,32,32,0.3)] mx-auto md:mx-0">
@@ -371,6 +371,51 @@
                     }
                 }
             </style>
+
+            <!-- Línea de Tiempo (Timeline Vertical) -->
+            @if($biography->photo_1 || $biography->photo_2 || $biography->photo_3)
+            <div class="relative mt-24 max-w-5xl mx-auto">
+                <!-- Línea central brillante -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-red via-red-900 to-transparent hidden md:block opacity-50 shadow-[0_0_15px_rgba(230,32,32,0.8)]"></div>
+                <div class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-red via-red-900 to-transparent md:hidden opacity-50"></div>
+
+                @for($i = 1; $i <= 3; $i++)
+                    @if($biography->{'photo_'.$i})
+                    <div class="relative flex items-center justify-between md:justify-normal md:even:flex-row-reverse group w-full mb-16 md:mb-24 fade-timeline-item opacity-0 translate-y-12 transition-all duration-1000 ease-out">
+                        <!-- Punto central (Timeline node) -->
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-black border-4 border-brand-red rounded-full z-20 group-hover:bg-brand-red transition-colors duration-300 shadow-[0_0_15px_rgba(230,32,32,0.8)]"></div>
+                        
+                        <!-- Contenido (Foto) -->
+                        <div class="w-full md:w-5/12 pl-16 md:pl-0">
+                            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:shadow-[0_0_30px_rgba(230,32,32,0.2)] transition-all duration-500 transform group-hover:-translate-y-2">
+                                <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
+                                <img src="{{ asset('storage/' . $biography->{'photo_'.$i}) }}" alt="Momento {{ $i }}" class="w-full h-64 md:h-80 object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
+                            </div>
+                            
+                            <!-- Texto (Aparece debajo en móvil, o al lado en desktop) -->
+                            <div class="mt-6 md:hidden text-gray-300 font-light text-lg">
+                                {{ $biography->{'desc_'.$i} }}
+                            </div>
+                        </div>
+
+                        <!-- Espaciador central (solo desktop) -->
+                        <div class="hidden md:block w-2/12"></div>
+
+                        <!-- Contenido (Texto - solo desktop) -->
+                        <div class="hidden md:flex w-5/12 items-center">
+                            <div class="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl w-full shadow-xl relative overflow-hidden group-hover:bg-white/10 transition-colors duration-500">
+                                <div class="absolute top-0 left-0 w-1 h-full bg-brand-red"></div>
+                                <h4 class="text-brand-red font-racing text-xl uppercase tracking-widest mb-3">Momento Clave</h4>
+                                <p class="text-gray-300 font-light text-xl leading-relaxed">
+                                    {{ $biography->{'desc_'.$i} }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                @endfor
+            </div>
+            @endif
             @endif
 
             <!-- Grid de Secciones Dinámicas -->
@@ -840,6 +885,24 @@
             }, { root: null, rootMargin: '0px', threshold: 0.15 });
 
             revealElements.forEach(el => revealObserver.observe(el));
+
+            // --- Animación del Timeline ---
+            const timelineItems = document.querySelectorAll('.fade-timeline-item');
+            
+            const timelineObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-12');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }, index * 200); // Efecto escalonado más notorio para el timeline
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.2 });
+
+            timelineItems.forEach(el => timelineObserver.observe(el));
         });
     </script>
 </body>

@@ -14,5 +14,11 @@ class Biography extends Model
         'content',
         'image_path',
         'is_active',
+        'photo_1',
+        'desc_1',
+        'photo_2',
+        'desc_2',
+        'photo_3',
+        'desc_3',
     ];
 }

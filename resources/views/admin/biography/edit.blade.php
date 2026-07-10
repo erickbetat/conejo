@@ -62,6 +62,33 @@
                 <p style="color: var(--color-gray); font-size: 0.8rem; margin-top: 0.5rem;">Sube una nueva foto para reemplazar la actual (Max 5MB. Recomendado: Vertical u horizontal de alta calidad).</p>
             </div>
 
+            <!-- TIMELINE SECTION -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-white);">Línea de Tiempo (Momentos Clave)</h2>
+                <p style="color: var(--color-gray); margin-bottom: 2rem;">Añade hasta 3 fotos con descripciones cortas para mostrar en el recorrido vertical.</p>
+
+                @for($i = 1; $i <= 3; $i++)
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <h3 style="color: var(--color-red); margin-bottom: 1rem;">Momento {{ $i }}</h3>
+                    
+                    <div class="form-group">
+                        <label for="desc_{{ $i }}">Descripción Corta</label>
+                        <input type="text" id="desc_{{ $i }}" name="desc_{{ $i }}" value="{{ old('desc_'.$i, $biography->{'desc_'.$i}) }}" placeholder="Ej: Debut en Karting Nacional">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="photo_{{ $i }}">Foto del Momento</label>
+                        @if($biography->{'photo_'.$i})
+                            <div style="margin-bottom: 1rem;">
+                                <img src="{{ asset('storage/' . $biography->{'photo_'.$i}) }}" alt="Foto {{ $i }}" style="max-width: 150px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                            </div>
+                        @endif
+                        <input type="file" id="photo_{{ $i }}" name="photo_{{ $i }}" accept="image/jpeg,image/png,image/webp" style="background: transparent; border: none; padding: 0;">
+                    </div>
+                </div>
+                @endfor
+            </div>
+
             <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 2rem;">
                 <input type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $biography->is_active) ? 'checked' : '' }} style="width: auto;">
                 <label for="is_active" style="margin: 0; cursor: pointer;">Mostrar biografía en la página principal</label>
