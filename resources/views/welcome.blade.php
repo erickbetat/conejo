@@ -1163,11 +1163,11 @@
         });
     </script>
 
-    <!-- Banner de Cookies / Privacidad -->
+    <!-- Banner de Privacidad -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-brand-dark/95 backdrop-blur-md border-t border-brand-red/50 text-white z-[9999] transform translate-y-full transition-transform duration-700 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <div class="max-w-7xl mx-auto px-6 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="text-sm text-gray-300 font-light flex-1 text-center md:text-left">
-                Utilizamos cookies y tecnologías similares para mejorar tu experiencia. Al continuar navegando, aceptas nuestro 
+                Al navegar en nuestro sitio web, aceptas nuestro 
                 <a href="{{ route('legal.privacidad') }}" class="text-brand-red hover:text-white underline transition-colors">Aviso de Privacidad</a> y 
                 <a href="{{ route('legal.terminos') }}" class="text-brand-red hover:text-white underline transition-colors">Términos y Condiciones</a>.
             </div>
