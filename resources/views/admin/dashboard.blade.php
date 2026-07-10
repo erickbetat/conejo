@@ -82,7 +82,7 @@
                     <span style="background: var(--color-red); color: white; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; margin-left: 5px;">{{ $unread }}</span>
                 @endif
             </h2>
-            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Lee y administra los correos y mensajes de tus patrocinadores.</p>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Lee y administra los correos y mensajes de tus colaboradores.</p>
             <a href="{{ route('admin.contacts.index') }}" class="btn" style="text-decoration: none; background: var(--color-white); color: var(--color-black);">Ver Bandeja</a>
         </div>
 

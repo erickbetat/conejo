@@ -588,6 +588,34 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Suscripción Personalizada (Tarjeta Horizontal) -->
+            <div class="mt-8 max-w-6xl mx-auto">
+                <div class="bg-brand-black border border-white/5 flex flex-col md:flex-row items-center justify-between shadow-2xl transition-all duration-300 hover:border-brand-red/30 rounded-2xl overflow-hidden relative group p-8 md:p-12">
+                    <!-- Destello de fondo -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-red/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                    
+                    <div class="flex-1 text-left relative z-10 mb-8 md:mb-0 md:pr-12">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h4 class="text-3xl font-racing uppercase text-white tracking-wide">Suscripción Personalizada</h4>
+                            <span class="bg-white/10 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Socio Corporativo</span>
+                        </div>
+                        <div class="font-racing text-2xl text-brand-red mb-4">Plan a la medida</div>
+                        <p class="text-gray-400 text-sm md:text-base font-light max-w-2xl">
+                            ¿Representas a una marca o buscas una experiencia VIP grupal? Diseñamos un paquete de colaboraciones, presencia de marca y experiencias en pista que se ajuste exactamente a los objetivos de tu empresa.
+                        </p>
+                    </div>
+                    
+                    <div class="w-full md:w-auto flex-shrink-0 relative z-10">
+                        <a href="#contacto" class="inline-flex items-center justify-center w-full md:w-auto bg-transparent border-2 border-brand-red text-white font-racing text-xl uppercase py-4 px-10 transition-all hover:bg-brand-red rounded-xl group-hover:shadow-[0_0_25px_rgba(230,32,32,0.3)]">
+                            Contáctanos
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

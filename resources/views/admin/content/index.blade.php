@@ -20,7 +20,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
         <div>
             <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Secciones de la Página</h1>
-            <p style="color: var(--color-gray);">Administra los bloques de contenido (ej. Mis Karts, Patrocinadores, etc).</p>
+            <p style="color: var(--color-gray);">Administra los bloques de contenido (ej. Mis Karts, Colaboradores, etc).</p>
         </div>
         <a href="{{ route('admin.content.create') }}" class="btn" style="text-decoration: none;">+ Nueva Sección</a>
     </div>
