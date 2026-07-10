@@ -107,7 +107,7 @@
                 
                 <!-- Redes Sociales -->
                 <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-110 border-l border-white/20 pl-8 ml-2 flex items-center">
-                    <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-6 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
                 </a>
 
                 <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 pulse-glow" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme al Club</a>
