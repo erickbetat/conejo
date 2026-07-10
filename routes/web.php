@@ -14,10 +14,11 @@ use App\Models\Partner;
 // Vista Pública (Landing Page)
 Route::get('/', function () {
     $biography = Biography::where('is_active', true)->first();
-    $sections = Content::orderBy('sort_order', 'asc')->get();
-    $partners = Partner::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+    $sections = \App\Models\Content::where('is_active', true)->orderBy('sort_order')->get();
+    $partners = \App\Models\Partner::where('is_active', true)->orderBy('sort_order')->get();
     $settings = \App\Models\Setting::all()->keyBy('key');
-    return view('welcome', compact('biography', 'sections', 'partners', 'settings'));
+    $merches = \App\Models\Merch::where('is_active', true)->orderBy('sort_order')->get();
+    return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches'));
 });
 // Ruta de ayuda para Hostinger / Producción (crea el enlace simbólico del storage)
 Route::get('/crear-symlink', function () {
@@ -50,8 +51,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Aliados / Socios
         Route::resource('/partners', PartnerController::class)->except(['show']);
         
-        // Configuraciones Generales
-        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        // Rutas de Configuración del Sistema
+        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('settings.edit');
         Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+
+        // Rutas de Merch
+        Route::resource('merch', \App\Http\Controllers\Admin\MerchController::class)->except(['show']);
     });
 });

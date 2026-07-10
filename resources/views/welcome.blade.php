@@ -101,6 +101,7 @@
             
             <div class="hidden md:flex items-center gap-8 font-medium">
                 <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
+                <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Colaboradores</a>
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
                 
                 <!-- Redes Sociales -->
@@ -396,6 +397,68 @@
         </div>
     </section>
 
+    @if(isset($merches) && $merches->count() > 0)
+    <!-- Sección de Merch (Minimalista Cristal) -->
+    <section id="merch" class="py-24 px-6 bg-brand-black relative z-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-1 border border-white/20 text-white/60 text-sm font-bold uppercase tracking-widest rounded-full mb-4 backdrop-blur-md">Tienda Oficial</div>
+                <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-4 uppercase italic">Conejo <span class="text-brand-red">Merch</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">Vístete con los colores del equipo y apoya a Cristian en cada carrera.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($merches as $merch)
+                <!-- Tarjeta de Merch Minimalista -->
+                <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col group transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(230,32,32,0.1)] cursor-pointer" onclick="openMerchModal('{{ $merch->title }}', '{{ $merch->price }}', '{{ $merch->image_path ? asset('storage/' . $merch->image_path) : '' }}')">
+                    <div class="relative h-72 w-full overflow-hidden bg-black/20 flex items-center justify-center p-6">
+                        @if($merch->image_path)
+                            <img src="{{ asset('storage/' . $merch->image_path) }}" alt="{{ $merch->title }}" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-700">
+                        @else
+                            <span class="text-gray-600 font-racing uppercase tracking-widest">Sin Imagen</span>
+                        @endif
+                        
+                        <!-- Overlay de "Ver más" -->
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                            <span class="bg-brand-red text-white font-racing tracking-wider uppercase px-6 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">Lo quiero</span>
+                        </div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-racing text-white uppercase tracking-wider mb-2">{{ $merch->title }}</h3>
+                        <div class="text-brand-red font-bold text-lg">MXN ${{ number_format($merch->price, 2) }}</div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Compra de Merch -->
+    <div id="merch-modal" class="fixed inset-0 hidden items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm bg-black/80 z-[9999] px-4">
+        <div class="bg-brand-dark border border-white/10 rounded-2xl w-full max-w-lg transform scale-95 transition-transform duration-300 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col">
+            <!-- Header decorativo -->
+            <div class="h-2 w-full bg-gradient-to-r from-brand-red to-red-900"></div>
+            
+            <button onclick="closeMerchModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-black/50 hover:bg-brand-red rounded-full w-8 h-8 flex items-center justify-center transition-all z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            
+            <div class="p-8 text-center relative z-10 flex flex-col items-center">
+                <div id="merch-modal-image-container" class="w-48 h-48 mb-6 flex items-center justify-center">
+                    <img id="merch-modal-image" src="" alt="" class="w-full h-full object-contain drop-shadow-2xl">
+                </div>
+                
+                <h3 id="merch-modal-title" class="text-3xl font-racing uppercase tracking-wider text-white mb-2">Producto</h3>
+                <div id="merch-modal-price" class="text-2xl text-brand-red font-bold mb-8">MXN $0.00</div>
+                
+                <p class="text-gray-400 text-sm mb-8 font-light">Pronto habilitaremos las compras seguras con Mercado Pago. ¡Mantente atento!</p>
+                
+                <button onclick="closeMerchModal()" class="w-full py-4 bg-white/10 hover:bg-white/20 text-white font-racing uppercase tracking-widest rounded-xl transition-all border border-white/5">Volver</button>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <!-- Opciones de Suscripción (Tarjetas Fusión) -->
     <section id="suscripciones" class="py-24 px-6 bg-brand-black relative">
         <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_bottom_center,_var(--tw-gradient-stops))] from-brand-red/20 via-transparent to-transparent"></div>
@@ -579,6 +642,53 @@
 
     <!-- Script de Animaciones y UX -->
     <script>
+        // --- Modal de Merch ---
+        function openMerchModal(title, price, imageSrc) {
+            const modal = document.getElementById('merch-modal');
+            const inner = modal.children[0];
+            
+            // Llenar datos
+            document.getElementById('merch-modal-title').innerText = title;
+            document.getElementById('merch-modal-price').innerText = 'MXN $' + parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2});
+            
+            const imgContainer = document.getElementById('merch-modal-image-container');
+            const img = document.getElementById('merch-modal-image');
+            
+            if (imageSrc) {
+                img.src = imageSrc;
+                img.alt = title;
+                imgContainer.style.display = 'flex';
+            } else {
+                imgContainer.style.display = 'none';
+            }
+            
+            // Mostrar modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                inner.classList.remove('scale-95');
+                inner.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeMerchModal() {
+            const modal = document.getElementById('merch-modal');
+            const inner = modal.children[0];
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            inner.classList.remove('scale-100');
+            inner.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
         // --- Modal de Redes Sociales ---
         function openSocialModal(e) {
             if(e) e.preventDefault();

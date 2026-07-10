@@ -42,6 +42,14 @@
 
         <div class="glass-panel" style="padding: 2rem;">
             <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">🛍</span> Merchandising
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Sube y administra los artículos de tu tienda oficial de merch.</p>
+            <a href="{{ route('admin.merch.index') }}" class="btn" style="text-decoration: none;">Gestionar Merch</a>
+        </div>
+
+        <div class="glass-panel" style="padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
                 <span style="color: var(--color-red); font-size: 1.5rem;">$</span> Suscriptores
             </h2>
             <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Revisa quién te está apoyando a través de MercadoPago.</p>
