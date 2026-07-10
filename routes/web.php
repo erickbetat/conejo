@@ -56,6 +56,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 
         // Rutas de Merch
-        Route::resource('merch', \App\Http\Controllers\Admin\MerchController::class)->except(['show']);
+        Route::resource('/merch', \App\Http\Controllers\Admin\MerchController::class)->except(['show']);
+
+        // Rutas de Contacto
+        Route::resource('/contacts', \App\Http\Controllers\Admin\ContactMessageController::class)->only(['index', 'show', 'destroy']);
     });
 });
+
+Route::post('/contacto', [\App\Http\Controllers\ContactController::class, 'store'])->name('contacto.store');

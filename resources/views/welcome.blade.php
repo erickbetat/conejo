@@ -103,6 +103,7 @@
                 <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
                 <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Colaboradores</a>
+                <a href="#contacto" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Contacto</a>
                 
                 <!-- Redes Sociales -->
                 <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-110 border-l border-white/20 pl-8 ml-2 flex items-center">
@@ -636,12 +637,82 @@
     </section>
     @endif
 
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-24 px-6 relative z-20 overflow-hidden bg-brand-dark">
+        <!-- Elementos decorativos de fondo -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-red rounded-full blur-[120px] opacity-10"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-[100px] opacity-5"></div>
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-1 border border-white/20 text-white/60 text-sm font-bold uppercase tracking-widest rounded-full mb-4 backdrop-blur-md">Ponte en Contacto</div>
+                <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-4 uppercase italic">Hablemos de <span class="text-brand-red">Negocios</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">¿Interesado en colaborar con el equipo? Déjanos un mensaje y nos pondremos en contacto contigo lo antes posible.</p>
+            </div>
+
+            @if(session('contact_success'))
+                <div class="bg-green-500/10 border border-green-500/30 text-green-400 p-6 rounded-2xl text-center mb-8 font-light text-lg flex flex-col items-center animate-fade-in-up">
+                    <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    {{ session('contact_success') }}
+                </div>
+            @endif
+
+            <div class="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-900 to-transparent"></div>
+                
+                <form action="{{ route('contacto.store') }}" method="POST" class="space-y-6">
+                    @csrf
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Nombre -->
+                        <div class="space-y-2">
+                            <label for="name" class="text-white/80 font-racing uppercase tracking-wider text-sm">Tu Nombre Completo *</label>
+                            <input type="text" id="name" name="name" required class="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300" placeholder="Ej. Juan Pérez">
+                            @error('name') <span class="text-brand-red text-xs">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Email -->
+                        <div class="space-y-2">
+                            <label for="email" class="text-white/80 font-racing uppercase tracking-wider text-sm">Correo Electrónico *</label>
+                            <input type="email" id="email" name="email" required class="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300" placeholder="ejemplo@correo.com">
+                            @error('email') <span class="text-brand-red text-xs">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="space-y-2">
+                        <label for="phone" class="text-white/80 font-racing uppercase tracking-wider text-sm">Teléfono (Opcional)</label>
+                        <input type="tel" id="phone" name="phone" class="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300" placeholder="Ej. +52 55 1234 5678">
+                        @error('phone') <span class="text-brand-red text-xs">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Mensaje -->
+                    <div class="space-y-2">
+                        <label for="message" class="text-white/80 font-racing uppercase tracking-wider text-sm">Tu Mensaje *</label>
+                        <textarea id="message" name="message" rows="5" required class="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300 resize-y" placeholder="Cuéntanos en qué te gustaría colaborar..."></textarea>
+                        @error('message') <span class="text-brand-red text-xs">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="pt-4 text-center">
+                        <button type="submit" class="w-full md:w-auto inline-flex items-center justify-center bg-brand-red text-white font-racing tracking-widest uppercase text-xl px-12 py-5 rounded-full hover:bg-white hover:text-brand-red transition-all duration-300 group shadow-[0_0_20px_rgba(230,32,32,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]">
+                            <span>Enviar Mensaje</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-8 relative z-20">
         <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-105">
             <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
         </a>
-        <p class="text-brand-gray font-light text-sm">&copy; {{ date('Y') }} Conejo Cantú 88. Todos los derechos reservados.</p>
+        <p class="text-brand-gray font-light text-sm">&copy; {{ date('Y') }} Conejo Cantú. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Botón Flotante WhatsApp -->

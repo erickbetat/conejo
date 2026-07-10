@@ -72,6 +72,20 @@
             <a href="{{ route('admin.settings.index') }}" class="btn" style="text-decoration: none;">Editar Ajustes</a>
         </div>
 
+        <div class="glass-panel" style="padding: 2rem; border-color: rgba(230, 32, 32, 0.4);">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">✉</span> Mensajes
+                @php
+                    $unread = \App\Models\ContactMessage::where('is_read', false)->count();
+                @endphp
+                @if($unread > 0)
+                    <span style="background: var(--color-red); color: white; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; margin-left: 5px;">{{ $unread }}</span>
+                @endif
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Lee y administra los correos y mensajes de tus patrocinadores.</p>
+            <a href="{{ route('admin.contacts.index') }}" class="btn" style="text-decoration: none; background: var(--color-white); color: var(--color-black);">Ver Bandeja</a>
+        </div>
+
     </div>
 </div>
 @endsection
