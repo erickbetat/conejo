@@ -890,11 +890,15 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-8 relative z-20">
+    <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-6 relative z-20">
         <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-105">
             <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
         </a>
-        <p class="text-brand-gray font-light text-sm">&copy; {{ date('Y') }} Conejo Cantú. Todos los derechos reservados.</p>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm font-light text-gray-500">
+            <a href="{{ route('legal.privacidad') }}" class="hover:text-white transition-colors">Aviso de Privacidad</a>
+            <a href="{{ route('legal.terminos') }}" class="hover:text-white transition-colors">Términos y Condiciones</a>
+        </div>
+        <p class="text-brand-gray font-light text-sm text-center px-4">&copy; {{ date('Y') }} Carreras Conejos AC. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Botón Flotante WhatsApp -->
@@ -1156,6 +1160,44 @@
             }, { root: null, rootMargin: '0px', threshold: 0.2 });
 
             timelineItems.forEach(el => timelineObserver.observe(el));
+        });
+    </script>
+
+    <!-- Banner de Cookies / Privacidad -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-brand-dark/95 backdrop-blur-md border-t border-brand-red/50 text-white z-[9999] transform translate-y-full transition-transform duration-700 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div class="max-w-7xl mx-auto px-6 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-gray-300 font-light flex-1 text-center md:text-left">
+                Utilizamos cookies y tecnologías similares para mejorar tu experiencia. Al continuar navegando, aceptas nuestro 
+                <a href="{{ route('legal.privacidad') }}" class="text-brand-red hover:text-white underline transition-colors">Aviso de Privacidad</a> y 
+                <a href="{{ route('legal.terminos') }}" class="text-brand-red hover:text-white underline transition-colors">Términos y Condiciones</a>.
+            </div>
+            <div class="flex-shrink-0 w-full md:w-auto">
+                <button id="accept-cookies" class="w-full md:w-auto bg-brand-red hover:bg-red-700 text-white px-8 py-2 rounded-lg font-racing uppercase tracking-widest text-lg transition-colors">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieBanner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('accept-cookies');
+            
+            // Comprobar si el usuario ya aceptó (en localStorage)
+            if (!localStorage.getItem('cookies_accepted')) {
+                // Mostrar banner con un pequeño retraso
+                setTimeout(() => {
+                    cookieBanner.classList.remove('translate-y-full');
+                }, 1000);
+            }
+
+            acceptBtn.addEventListener('click', function() {
+                // Guardar consentimiento
+                localStorage.setItem('cookies_accepted', 'true');
+                // Ocultar banner
+                cookieBanner.classList.add('translate-y-full');
+            });
         });
     </script>
 </body>

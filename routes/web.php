@@ -20,7 +20,7 @@ Route::get('/', function () {
     $merches = \App\Models\Merch::where('is_active', true)->orderBy('sort_order')->get();
     return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches'));
 });
-// Ruta de ayuda para Hostinger / Producción (crea el enlace simbólico del storage)
+// Rutas de Ayuda/Técnicas
 Route::get('/crear-symlink', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('storage:link');
@@ -29,6 +29,10 @@ Route::get('/crear-symlink', function () {
         return "Error al crear el enlace: " . $e->getMessage();
     }
 });
+
+// Rutas Legales
+Route::view('/aviso-de-privacidad', 'legal.aviso-privacidad')->name('legal.privacidad');
+Route::view('/terminos-y-condiciones', 'legal.terminos')->name('legal.terminos');
 
 // Rutas de Administración
 Route::prefix('admin')->name('admin.')->group(function () {
