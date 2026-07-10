@@ -43,16 +43,23 @@
                 <input type="url" name="url" value="{{ old('url') }}" placeholder="https://ejemplo.com">
             </div>
 
-            <div style="display: flex; gap: 1rem;">
-                <div class="form-group" style="flex: 1;">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 200px;">
                     <label>Orden de visualización</label>
                     <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}">
                 </div>
                 
-                <div class="form-group" style="flex: 1; display: flex; align-items: center; margin-top: 1.5rem;">
+                <div class="form-group" style="flex: 1; min-width: 200px; display: flex; align-items: center; margin-top: 1.5rem;">
                     <label style="margin-bottom: 0; display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                        <input type="checkbox" name="is_active" value="1" checked style="width: auto;">
+                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }} style="width: auto;">
                         Mostrar públicamente
+                    </label>
+                </div>
+
+                <div class="form-group" style="flex: 1; min-width: 200px; display: flex; align-items: center; margin-top: 1.5rem;">
+                    <label style="margin-bottom: 0; display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--color-red);">
+                        <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }} style="width: auto;">
+                        Colaborador Destacado (Máx 3)
                     </label>
                 </div>
             </div>

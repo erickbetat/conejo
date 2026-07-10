@@ -11,7 +11,7 @@ class PartnerController extends Controller
 {
     public function index()
     {
-        $partners = Partner::orderBy('sort_order', 'asc')->get();
+        $partners = Partner::orderBy('is_featured', 'desc')->orderBy('sort_order', 'asc')->get();
         return view('admin.partner.index', compact('partners'));
     }
 
@@ -29,6 +29,11 @@ class PartnerController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
+        $is_featured = $request->has('is_featured');
+        if ($is_featured && Partner::where('is_featured', true)->count() >= 3) {
+            return back()->withInput()->withErrors(['is_featured' => 'No puedes destacar más de 3 aliados. Desmarca uno primero.']);
+        }
+
         $logoPath = $request->file('logo')->store('partners', 'public');
 
         Partner::create([
@@ -36,6 +41,7 @@ class PartnerController extends Controller
             'logo_path' => $logoPath,
             'url' => $request->url,
             'is_active' => $request->has('is_active'),
+            'is_featured' => $is_featured,
             'sort_order' => $request->sort_order ?? 0,
         ]);
 
@@ -56,10 +62,16 @@ class PartnerController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
+        $is_featured = $request->has('is_featured');
+        if ($is_featured && !$partner->is_featured && Partner::where('is_featured', true)->count() >= 3) {
+            return back()->withInput()->withErrors(['is_featured' => 'No puedes destacar más de 3 aliados. Desmarca uno primero.']);
+        }
+
         $data = [
             'name' => $request->name,
             'url' => $request->url,
             'is_active' => $request->has('is_active'),
+            'is_featured' => $is_featured,
             'sort_order' => $request->sort_order ?? 0,
         ];
 

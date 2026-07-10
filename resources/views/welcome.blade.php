@@ -610,8 +610,70 @@
                 <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">Marcas e instituciones que hacen posible este sueño y aceleran junto a nosotros hacia la cima.</p>
             </div>
             
+            @php
+                $featuredPartners = $partners->where('is_featured', true)->values();
+                $otherPartners = $partners->where('is_featured', false)->values();
+            @endphp
+
+            @if($featuredPartners->count() > 0)
+                <!-- Podio de Destacados -->
+                <div class="mb-16 flex flex-col items-center">
+                    <!-- Primer lugar (Centro arriba) -->
+                    @if($featuredPartners->has(0))
+                        <div class="w-full max-w-xl bg-brand-dark/60 backdrop-blur-md border-2 border-brand-red/50 hover:border-brand-red hover:bg-white/10 rounded-2xl p-12 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(230,32,32,0.3)] group relative overflow-hidden flex items-center justify-center min-h-[350px] mb-8 z-20">
+                            <div class="absolute top-0 right-0 w-48 h-48 bg-brand-red/30 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute top-4 left-1/2 transform -translate-x-1/2">
+                                <span class="text-brand-red text-sm font-bold uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full border border-brand-red/30">Premium Partner</span>
+                            </div>
+                            <div class="w-full transition-transform duration-500 group-hover:scale-110 relative z-10 flex justify-center">
+                                @if($featuredPartners[0]->url)
+                                    <a href="{{ $featuredPartners[0]->url }}" target="_blank" rel="noopener noreferrer" class="block w-full flex justify-center">
+                                        <img src="{{ asset('storage/' . $featuredPartners[0]->logo_path) }}" alt="{{ $featuredPartners[0]->name }}" class="w-auto h-auto object-contain max-h-56 max-w-[90%] drop-shadow-2xl">
+                                    </a>
+                                @else
+                                    <img src="{{ asset('storage/' . $featuredPartners[0]->logo_path) }}" alt="{{ $featuredPartners[0]->name }}" class="w-auto h-auto object-contain max-h-56 max-w-[90%] drop-shadow-2xl">
+                                @endif
+                            </div>
+                            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
+                                <span class="bg-brand-black border border-brand-red text-white text-xs font-racing tracking-widest px-5 py-2 rounded-full uppercase whitespace-nowrap shadow-lg">{{ $featuredPartners[0]->name }}</span>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Segundo y Tercer lugar (Costados abajo) -->
+                    @if($featuredPartners->has(1) || $featuredPartners->has(2))
+                        <div class="flex flex-col md:flex-row justify-center gap-6 md:gap-12 w-full max-w-4xl -mt-4 md:-mt-12 z-10">
+                            @foreach([1, 2] as $index)
+                                @if($featuredPartners->has($index))
+                                    <div class="w-full md:w-1/2 bg-brand-dark/50 backdrop-blur-sm border border-brand-red/30 hover:border-brand-red/70 hover:bg-white/5 rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(230,32,32,0.2)] group relative overflow-hidden flex items-center justify-center min-h-[200px]">
+                                        <div class="absolute top-0 right-0 w-24 h-24 bg-brand-red/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        <div class="w-full transition-transform duration-500 group-hover:scale-110 relative z-10 flex justify-center">
+                                            @if($featuredPartners[$index]->url)
+                                                <a href="{{ $featuredPartners[$index]->url }}" target="_blank" rel="noopener noreferrer" class="block w-full flex justify-center">
+                                                    <img src="{{ asset('storage/' . $featuredPartners[$index]->logo_path) }}" alt="{{ $featuredPartners[$index]->name }}" class="w-auto h-auto object-contain max-h-32 max-w-[85%] drop-shadow-lg">
+                                                </a>
+                                            @else
+                                                <img src="{{ asset('storage/' . $featuredPartners[$index]->logo_path) }}" alt="{{ $featuredPartners[$index]->name }}" class="w-auto h-auto object-contain max-h-32 max-w-[85%] drop-shadow-lg">
+                                            @endif
+                                        </div>
+                                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
+                                            <span class="bg-brand-black border border-brand-red/50 text-white text-xs font-racing tracking-widest px-4 py-1.5 rounded-full uppercase whitespace-nowrap shadow-lg">{{ $featuredPartners[$index]->name }}</span>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                
+                @if($otherPartners->count() > 0)
+                    <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12"></div>
+                @endif
+            @endif
+            
+            @if($otherPartners->count() > 0)
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 justify-items-center">
-                @foreach($partners as $partner)
+                @foreach($otherPartners as $partner)
                     <div class="w-full bg-brand-dark/40 backdrop-blur-sm border border-white/5 hover:border-brand-red/40 hover:bg-white/5 rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(230,32,32,0.15)] group relative overflow-hidden flex items-center justify-center min-h-[200px]">
                         <!-- Destello de esquina -->
                         <div class="absolute top-0 right-0 w-20 h-20 bg-brand-red/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -633,6 +695,7 @@
                     </div>
                 @endforeach
             </div>
+            @endif
         </div>
     </section>
     @endif

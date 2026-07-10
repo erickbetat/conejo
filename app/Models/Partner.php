@@ -15,5 +15,6 @@ class Partner extends Model
         'url',
         'is_active',
         'sort_order',
+        'is_featured',
     ];
 }
