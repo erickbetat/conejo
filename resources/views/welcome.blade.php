@@ -521,7 +521,7 @@
                 <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,255,255,0.05)] rounded-2xl overflow-hidden relative group">
                     <div class="p-8 pb-0">
                         <h4 class="text-2xl font-racing uppercase text-gray-400 mb-1">Club Oro</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_oro_price']->value ?? 180) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
+                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_oro_price']->value ?? 188) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. Vamos juntos a la Fórmula 1!!!</p>
