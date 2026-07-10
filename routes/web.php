@@ -14,7 +14,7 @@ use App\Models\Partner;
 // Vista Pública (Landing Page)
 Route::get('/', function () {
     $biography = Biography::where('is_active', true)->first();
-    $sections = \App\Models\Content::where('is_active', true)->orderBy('sort_order')->get();
+    $sections = \App\Models\Content::orderBy('sort_order', 'asc')->get();
     $partners = \App\Models\Partner::where('is_active', true)->orderBy('sort_order')->get();
     $settings = \App\Models\Setting::all()->keyBy('key');
     $merches = \App\Models\Merch::where('is_active', true)->orderBy('sort_order')->get();
@@ -52,7 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/partners', PartnerController::class)->except(['show']);
         
         // Rutas de Configuración del Sistema
-        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('settings.edit');
+        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 
         // Rutas de Merch

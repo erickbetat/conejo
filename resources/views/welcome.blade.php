@@ -407,10 +407,10 @@
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">Vístete con los colores del equipo y apoya a Cristian en cada carrera.</p>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="flex flex-wrap justify-center gap-8">
                 @foreach($merches as $merch)
                 <!-- Tarjeta de Merch Minimalista -->
-                <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col group transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(230,32,32,0.1)] cursor-pointer" onclick="openMerchModal('{{ $merch->title }}', '{{ $merch->price }}', '{{ $merch->image_path ? asset('storage/' . $merch->image_path) : '' }}')">
+                <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col group transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(230,32,32,0.1)] cursor-pointer w-full max-w-sm" onclick="openMerchModal('{{ $merch->title }}', '{{ $merch->price }}', '{{ $merch->image_path ? asset('storage/' . $merch->image_path) : '' }}')">
                     <div class="relative h-72 w-full overflow-hidden bg-black/20 flex items-center justify-center p-6">
                         @if($merch->image_path)
                             <img src="{{ asset('storage/' . $merch->image_path) }}" alt="{{ $merch->title }}" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-700">
