@@ -616,11 +616,29 @@
             @endphp
 
             @if($featuredPartners->count() > 0)
+                <style>
+                    @keyframes float {
+                        0% { transform: translateY(0px); }
+                        50% { transform: translateY(-15px); }
+                        100% { transform: translateY(0px); }
+                    }
+                    .animate-float {
+                        animation: float 6s ease-in-out infinite;
+                    }
+                    .animate-float-delayed {
+                        animation: float 6s ease-in-out infinite;
+                        animation-delay: 2s;
+                    }
+                    /* Pausar al pasar el ratón */
+                    .animate-float:hover, .animate-float-delayed:hover {
+                        animation-play-state: paused;
+                    }
+                </style>
                 <!-- Podio de Destacados -->
                 <div class="mb-16 flex flex-col items-center">
                     <!-- Primer lugar (Centro arriba) -->
                     @if($featuredPartners->has(0))
-                        <div class="w-full max-w-xl bg-brand-dark/60 backdrop-blur-md border-2 border-brand-red/50 hover:border-brand-red hover:bg-white/10 rounded-2xl p-12 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(230,32,32,0.3)] group relative overflow-hidden flex items-center justify-center min-h-[350px] mb-8 z-20">
+                        <div class="animate-float w-full max-w-xl bg-brand-dark/60 backdrop-blur-md border-2 border-brand-red/50 hover:border-brand-red hover:bg-white/10 rounded-2xl p-12 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(230,32,32,0.3)] group relative overflow-hidden flex items-center justify-center min-h-[350px] mb-8 z-20">
                             <div class="absolute top-0 right-0 w-48 h-48 bg-brand-red/30 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="absolute top-4 left-1/2 transform -translate-x-1/2">
                                 <span class="text-brand-red text-sm font-bold uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full border border-brand-red/30">Premium Partner</span>
@@ -645,7 +663,7 @@
                         <div class="flex flex-col md:flex-row justify-center gap-6 md:gap-12 w-full max-w-4xl -mt-4 md:-mt-12 z-10">
                             @foreach([1, 2] as $index)
                                 @if($featuredPartners->has($index))
-                                    <div class="w-full md:w-1/2 bg-brand-dark/50 backdrop-blur-sm border border-brand-red/30 hover:border-brand-red/70 hover:bg-white/5 rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(230,32,32,0.2)] group relative overflow-hidden flex items-center justify-center min-h-[200px]">
+                                    <div class="animate-float-delayed w-full md:w-1/2 bg-brand-dark/50 backdrop-blur-sm border border-brand-red/30 hover:border-brand-red/70 hover:bg-white/5 rounded-xl p-8 transition-all duration-500 hover:shadow-[0_15px_30px_rgba(230,32,32,0.2)] group relative overflow-hidden flex items-center justify-center min-h-[200px]">
                                         <div class="absolute top-0 right-0 w-24 h-24 bg-brand-red/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                         <div class="w-full transition-transform duration-500 group-hover:scale-110 relative z-10 flex justify-center">
                                             @if($featuredPartners[$index]->url)
@@ -672,28 +690,59 @@
             @endif
             
             @if($otherPartners->count() > 0)
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 justify-items-center">
-                @foreach($otherPartners as $partner)
-                    <div class="w-full bg-brand-dark/40 backdrop-blur-sm border border-white/5 hover:border-brand-red/40 hover:bg-white/5 rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(230,32,32,0.15)] group relative overflow-hidden flex items-center justify-center min-h-[200px]">
-                        <!-- Destello de esquina -->
-                        <div class="absolute top-0 right-0 w-20 h-20 bg-brand-red/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div class="w-full transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2 filter grayscale group-hover:grayscale-0 relative z-10 flex justify-center">
-                            @if($partner->url)
-                                <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer" class="block w-full flex justify-center">
-                                    <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-auto h-auto object-contain max-h-32 max-w-[85%] drop-shadow-lg">
-                                </a>
-                            @else
-                                <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-auto h-auto object-contain max-h-32 max-w-[85%] drop-shadow-lg">
-                            @endif
+            <style>
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .animate-marquee {
+                    animation: marquee 35s linear infinite;
+                    display: flex;
+                    width: max-content;
+                }
+                .animate-marquee:hover {
+                    animation-play-state: paused;
+                }
+            </style>
+            
+            <!-- Carrusel Infinito -->
+            <div class="overflow-hidden relative w-full max-w-[100vw] mx-auto py-4">
+                <!-- Sombras en los bordes para un efecto de desvanecimiento -->
+                <div class="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-brand-black to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-brand-black to-transparent z-10 pointer-events-none"></div>
+
+                <div class="animate-marquee gap-6 md:gap-8 px-4">
+                    @php
+                        // Clonamos la lista 4 veces para asegurar que llene pantallas grandes y cicle sin cortes
+                        $carouselPartners = array_merge(
+                            $otherPartners->all(), 
+                            $otherPartners->all(), 
+                            $otherPartners->all(), 
+                            $otherPartners->all()
+                        );
+                    @endphp
+                    @foreach($carouselPartners as $partner)
+                        <div class="w-56 md:w-72 flex-shrink-0 bg-brand-dark/40 backdrop-blur-sm border border-white/5 hover:border-brand-red/40 hover:bg-white/5 rounded-xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(230,32,32,0.15)] group relative overflow-hidden flex items-center justify-center min-h-[160px] md:min-h-[180px]">
+                            <!-- Destello de esquina -->
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-brand-red/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            
+                            <div class="w-full transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2 filter grayscale group-hover:grayscale-0 relative z-10 flex justify-center">
+                                @if($partner->url)
+                                    <a href="{{ $partner->url }}" target="_blank" rel="noopener noreferrer" class="block w-full flex justify-center">
+                                        <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-auto h-auto object-contain max-h-24 md:max-h-28 max-w-[85%] drop-shadow-lg">
+                                    </a>
+                                @else
+                                    <img src="{{ asset('storage/' . $partner->logo_path) }}" alt="{{ $partner->name }}" class="w-auto h-auto object-contain max-h-24 md:max-h-28 max-w-[85%] drop-shadow-lg">
+                                @endif
+                            </div>
+                            
+                            <!-- Nombre en hover -->
+                            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
+                                <span class="bg-brand-black border border-brand-red/50 text-white text-[10px] md:text-xs font-racing tracking-widest px-3 md:px-4 py-1 md:py-1.5 rounded-full uppercase whitespace-nowrap shadow-lg">{{ $partner->name }}</span>
+                            </div>
                         </div>
-                        
-                        <!-- Nombre en hover -->
-                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
-                            <span class="bg-brand-black border border-brand-red/50 text-white text-xs font-racing tracking-widest px-4 py-1.5 rounded-full uppercase whitespace-nowrap shadow-lg">{{ $partner->name }}</span>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
             @endif
         </div>
