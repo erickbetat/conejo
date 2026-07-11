@@ -130,7 +130,7 @@
             <!-- Text Left -->
             <div class="p-8 md:p-12 animate-fade-in-up text-left">
                 <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                    PILOTO DE FORMULA 3
+                    PILOTO DE FÓRMULA 3
                 </div>
                 <div class="mb-8 mt-2">
                     <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Conejo Cantú" class="w-full max-w-[300px] md:max-w-md object-contain filter drop-shadow-[0_0_20px_rgba(230,32,32,0.3)] mx-auto md:mx-0">
@@ -518,138 +518,162 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Club Oro -->
-                <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,255,255,0.05)] rounded-2xl overflow-hidden relative group">
+                <div class="bg-brand-dark border border-yellow-500/50 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(234,179,8,0.15)] rounded-2xl overflow-hidden relative group">
                     <div class="p-8 pb-0">
-                        <h4 class="text-2xl font-racing uppercase text-gray-400 mb-1">Club Oro</h4>
+                        <h4 class="text-2xl font-racing uppercase text-yellow-500 mb-1">Club Oro</h4>
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_oro_price']->value ?? 188) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. Vamos juntos a la Fórmula 1!!!</p>
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
                         
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                Video de bienvenida
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                + Video de bienvenida
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                Credencial con # socio (PDF)
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                + Credencial con # socio (PDF)
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                Diploma digital de miembro oficial
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                + Diploma digital de miembro oficial
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                Contenido exclusivo fotos, videos y noticias.
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                + Contenido exclusivo fotos, videos y noticias.
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                Mandarme mensajes directos (Patreon)
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                + Mandarme mensajes directos
                             </li>
                         </ul>
                         
-                        <a href="#" class="block text-center w-full bg-white/5 border border-white/10 text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-white hover:text-black rounded-xl">Unirse a Oro</a>
+                        <a href="#" class="block text-center w-full bg-white/5 border border-yellow-500/50 text-yellow-500 font-racing text-xl uppercase py-3 transition-colors hover:bg-yellow-500 hover:text-black rounded-xl">Unirse a Oro</a>
                     </div>
                 </div>
 
                 <!-- Club Titanio (Popular) -->
-                <div class="bg-brand-dark border border-brand-red flex flex-col shadow-[0_0_30px_rgba(230,32,32,0.15)] transition-all duration-300 hover:-translate-y-4 hover:shadow-[0_10px_50px_rgba(230,32,32,0.25)] rounded-2xl overflow-hidden relative md:-mt-4 md:mb-4 group">
-                    <div class="absolute top-0 right-0 bg-brand-red text-white text-xs font-bold px-4 py-1 rounded-bl-lg uppercase tracking-widest z-10">Más Popular</div>
-                    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-brand-red/20 to-transparent"></div>
+                <div class="bg-brand-dark border border-gray-400 flex flex-col shadow-[0_0_30px_rgba(156,163,175,0.15)] transition-all duration-300 hover:-translate-y-4 hover:shadow-[0_10px_50px_rgba(156,163,175,0.25)] rounded-2xl overflow-hidden relative md:-mt-4 md:mb-4 group">
+                    <div class="absolute top-0 right-0 bg-gray-200 text-brand-black text-xs font-bold px-4 py-1 rounded-bl-lg uppercase tracking-widest z-10">Más Popular</div>
+                    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-gray-500/20 to-transparent"></div>
                     
                     <div class="p-8 pb-0 relative z-10">
-                        <h4 class="text-2xl font-racing uppercase text-brand-red mb-1">Club Titanio</h4>
+                        <h4 class="text-2xl font-racing uppercase text-gray-300 mb-1">Club Titanio</h4>
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_titanio_price']->value ?? 760) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <p class="text-sm text-gray-300 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. Vamos juntos a la Fórmula 1!!!</p>
+                        <p class="text-sm text-gray-300 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
                         
-                        <div class="mb-4 font-bold text-white text-sm italic">Incluye todo Club Oro + :</div>
+                        <div class="mb-4 font-bold text-gray-300 text-sm italic">Incluye todo Club Oro + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
                                 + Descuentos exclusivos en Conejo Merch
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
                                 + Invitación a evento exclusivo de socios (CDMX y Torreón)
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                + Video personalizado de cumpleaños!
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                + ¡Video personalizado de cumpleaños!
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
                                 + Participación sorteo anual Conejo Merch firmada (entrega gratis en México)
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
                                 Un conejo kit de regalo al cumplir 1 año (entrega gratis en México).
                             </li>
                         </ul>
                         
-                        <a href="#" class="block text-center w-full bg-brand-red text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-red-700 rounded-xl shadow-[0_0_15px_rgba(230,32,32,0.4)]">Unirse a Titanio</a>
+                        <a href="#" class="block text-center w-full bg-gray-300 text-brand-black font-racing text-xl uppercase py-3 transition-colors hover:bg-white rounded-xl shadow-[0_0_15px_rgba(156,163,175,0.4)]">Unirse a Titanio</a>
                     </div>
                 </div>
 
                 <!-- Club Elite -->
-                <div class="bg-brand-dark border border-white/10 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(255,215,0,0.1)] rounded-2xl overflow-hidden relative group">
-                    <div class="p-8 pb-0">
-                        <h4 class="text-2xl font-racing uppercase text-yellow-500 mb-1">Club Elite</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_elite_price']->value ?? 1880) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
+                <div class="bg-brand-dark border border-brand-red flex flex-col shadow-[0_0_30px_rgba(230,32,32,0.15)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(230,32,32,0.25)] rounded-2xl overflow-hidden relative group">
+                    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-brand-red/20 to-transparent z-0"></div>
+                    <div class="p-8 pb-0 relative z-10">
+                        <h4 class="text-2xl font-racing uppercase text-white mb-1">Club Elite</h4>
+                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_elite_price']->value ?? 1880) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto. <strong class="text-white">TENDRÁS TU NOMBRE EN MI AUTO !!!</strong><br><br>Únete a Conejo Club. Sé parte de esta historia. Vamos juntos a la Fórmula 1!!!</p>
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto. <strong class="text-white">¡TENDRÁS TU NOMBRE EN MI AUTO!</strong><br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
                         
-                        <div class="mb-4 font-bold text-yellow-500 text-sm italic">Incluye todo Club Oro y Club Titanio + :</div>
+                        <div class="mb-4 font-bold text-brand-red text-sm italic">Incluye todo Club Oro y Club Titanio + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Tu nombre en mi auto!!!
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                + ¡Tu nombre en mi auto!
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
                                 + Vídeo de agradecimiento exclusivo
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
                                 + Posibilidad de 1 videollamada conmigo
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Un conejo kit VIP de regalo (entrega gratis en México)
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                + Un conejo kit VIP de regalo entrega gratis en México al cumplir 1 año 
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
                                 + Reconocimiento en una historia en redes sociales (si tú lo deseas)
                             </li>
                         </ul>
                         
-                        <a href="#" class="block text-center w-full bg-white/5 border border-yellow-500/30 text-yellow-500 font-racing text-xl uppercase py-3 transition-all hover:bg-yellow-500 hover:text-black rounded-xl">Unirse a Elite</a>
+                        <a href="#" class="block text-center w-full bg-brand-red text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-red-700 rounded-xl shadow-[0_0_15px_rgba(230,32,32,0.4)]">Unirse a Elite</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Suscripción Personalizada (Tarjeta Horizontal) -->
-            <div class="mt-8 max-w-6xl mx-auto">
-                <div class="bg-brand-black border border-white/5 flex flex-col md:flex-row items-center justify-between shadow-2xl transition-all duration-300 hover:border-brand-red/30 rounded-2xl overflow-hidden relative group p-8 md:p-12">
+            <!-- Suscripciones Adicionales (Diamante y Aliado) -->
+            <div class="mt-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Club Diamante -->
+                <div class="bg-brand-black border border-cyan-500/30 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-cyan-400 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
                     <!-- Destello de fondo -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-red/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                     
-                    <div class="flex-1 text-left relative z-10 mb-8 md:mb-0 md:pr-12">
+                    <div class="relative z-10 flex-grow mb-8">
                         <div class="flex items-center gap-3 mb-2">
-                            <h4 class="text-3xl font-racing uppercase text-white tracking-wide">Suscripción Personalizada</h4>
-                            <span class="bg-white/10 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Socio Corporativo</span>
+                            <h4 class="text-3xl font-racing uppercase text-cyan-400 tracking-wide">Club Diamante</h4>
                         </div>
-                        <div class="font-racing text-2xl text-brand-red mb-4">Plan a la medida</div>
-                        <p class="text-gray-400 text-sm md:text-base font-light max-w-2xl">
-                            ¿Representas a una marca o buscas una experiencia VIP grupal? Diseñamos un paquete de colaboraciones, presencia de marca y experiencias en pista que se ajuste exactamente a los objetivos de tu empresa.
+                        <div class="font-racing text-2xl text-white mb-4">Aportación Libre</div>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">
+                            ¿Quieres apoyar aún más al proyecto? Te dejamos la puerta abierta para que tú decidas el monto. ¡Cualquier aportación suma para llegar a lo más alto!
                         </p>
                     </div>
                     
-                    <div class="w-full md:w-auto flex-shrink-0 relative z-10">
-                        <a href="#contacto" class="inline-flex items-center justify-center w-full md:w-auto bg-transparent border-2 border-brand-red text-white font-racing text-xl uppercase py-4 px-10 transition-all hover:bg-brand-red rounded-xl group-hover:shadow-[0_0_25px_rgba(230,32,32,0.3)]">
+                    <div class="w-full relative z-10">
+                        <a href="#contacto" class="inline-flex items-center justify-center w-full bg-transparent border-2 border-cyan-500/50 text-cyan-400 font-racing text-xl uppercase py-4 px-8 transition-all hover:bg-cyan-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                            Aportar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Aliado Estratégico -->
+                <div class="bg-brand-black border border-white/10 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-brand-red/50 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
+                    <!-- Destello de fondo -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex-grow mb-8">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h4 class="text-3xl font-racing uppercase text-white tracking-wide">Aliado Estratégico</h4>
+                        </div>
+                        <div class="font-racing text-2xl text-brand-red mb-4">Plan a tu medida</div>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">
+                            Si quieres ser colaborador o aliado estratégico, te armamos un plan de beneficios y presencia de marca totalmente personalizado para ti o tu empresa.
+                        </p>
+                    </div>
+                    
+                    <div class="w-full relative z-10">
+                        <a href="#contacto" class="inline-flex items-center justify-center w-full bg-brand-red text-white font-racing text-xl uppercase py-4 px-8 transition-all hover:bg-red-700 rounded-xl group-hover:shadow-[0_0_25px_rgba(230,32,32,0.4)]">
                             Contáctanos
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -657,6 +681,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -1036,7 +1061,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             // --- Animación Typewriter ---
-            const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de karting. Acompáñame hacia lo más alto del podio.' }}";
+            const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de Fórmula 3. Acompáñame hacia lo más alto del podio.' }}";
             const textElement = document.getElementById('typewriter-text');
             const buttonsElement = document.getElementById('hero-buttons');
             let typeIndex = 0;
