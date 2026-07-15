@@ -91,5 +91,6 @@ Route::post('/webhooks/mercadopago', [\App\Http\Controllers\WebhookController::c
 
 // Aportación a la medida (Pública)
 Route::post('/donate', [\App\Http\Controllers\SubscriptionController::class, 'donate'])->name('donate');
+Route::post('/donate/recurring', [\App\Http\Controllers\SubscriptionController::class, 'donateRecurring'])->name('donate.recurring');
 
 require __DIR__.'/auth.php';

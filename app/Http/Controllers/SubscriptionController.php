@@ -47,6 +47,11 @@ class SubscriptionController extends Controller
         }
 
         // Crear la preaprobación (suscripción) en Mercado Pago
+        $baseUrl = config('app.url', 'https://conejocantu.com');
+        if (str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '192.168')) {
+            $baseUrl = 'https://conejocantu.com';
+        }
+
         $response = Http::withToken($token)->post('https://api.mercadopago.com/preapproval', [
             'reason' => $reason,
             'external_reference' => (string) $user->id,
@@ -57,7 +62,7 @@ class SubscriptionController extends Controller
                 'transaction_amount' => (float) $price,
                 'currency_id' => 'MXN',
             ],
-            'back_url' => route('dashboard'),
+            'back_url' => $baseUrl . '/dashboard',
             'status' => 'pending',
         ]);
 
@@ -121,5 +126,51 @@ class SubscriptionController extends Controller
         \Illuminate\Support\Facades\Log::error('MercadoPago Error: ' . $errorDetail);
 
         return redirect()->back()->with('error', 'Error de Mercado Pago: ' . $errorDetail);
+    }
+
+    public function donateRecurring(Request $request)
+    {
+        $request->validate(['amount' => 'required|numeric|min:10']);
+        $amount = (float) $request->amount;
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Por favor inicia sesión o crea una cuenta para activar una suscripción mensual.');
+        }
+
+        $token = env('MERCADOPAGO_ACCESS_TOKEN');
+
+        if (!$token) {
+            return redirect()->back()->with('error', 'Error de configuración: Faltan credenciales de pago.');
+        }
+
+        $baseUrl = config('app.url', 'https://conejocantu.com');
+        if (str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '192.168')) {
+            $baseUrl = 'https://conejocantu.com';
+        }
+
+        $response = Http::withToken($token)->post('https://api.mercadopago.com/preapproval', [
+            'reason' => 'Aportación Mensual Libre - Conejo Cantú',
+            'external_reference' => (string) $user->id,
+            'payer_email' => $user->email,
+            'auto_recurring' => [
+                'frequency' => 1,
+                'frequency_type' => 'months',
+                'transaction_amount' => $amount,
+                'currency_id' => 'MXN',
+            ],
+            'back_url' => $baseUrl,
+            'status' => 'pending',
+        ]);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            return redirect()->away($data['init_point']);
+        }
+
+        $errorDetail = $response->body();
+        \Illuminate\Support\Facades\Log::error('MercadoPago Preapproval Error: ' . $errorDetail);
+
+        return redirect()->back()->with('error', 'Error al crear suscripción en Mercado Pago: ' . $errorDetail);
     }
 }
