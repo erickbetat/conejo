@@ -89,4 +89,7 @@ Route::middleware('auth')->group(function () {
 // Webhook de Mercado Pago
 Route::post('/webhooks/mercadopago', [\App\Http\Controllers\WebhookController::class, 'handleWebhook'])->name('webhook.mp');
 
+// Aportación a la medida (Pública)
+Route::post('/donate', [\App\Http\Controllers\SubscriptionController::class, 'donate'])->name('donate');
+
 require __DIR__.'/auth.php';

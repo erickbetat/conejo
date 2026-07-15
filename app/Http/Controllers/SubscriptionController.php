@@ -68,4 +68,58 @@ class SubscriptionController extends Controller
 
         return redirect()->back()->with('error', 'Hubo un error al conectar con Mercado Pago. Intenta nuevamente.');
     }
+
+    public function donate(Request $request)
+    {
+        $request->validate(['amount' => 'required|numeric|min:10']);
+        $amount = (float) $request->amount;
+        $user = Auth::user();
+
+        $token = env('MERCADOPAGO_ACCESS_TOKEN');
+
+        if (!$token) {
+            return redirect()->back()->with('error', 'Error de configuración: Faltan credenciales de pago.');
+        }
+
+        $baseUrl = config('app.url', 'https://conejocantu.com');
+        if (str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '192.168')) {
+            // Mercado Pago a veces rechaza IPs locales en back_urls
+            $baseUrl = 'https://conejocantu.com';
+        }
+
+        $preferenceData = [
+            'items' => [
+                [
+                    'title' => 'Aportación Libre - Conejo Cantú',
+                    'quantity' => 1,
+                    'unit_price' => $amount,
+                    'currency_id' => 'MXN',
+                ]
+            ],
+            'back_urls' => [
+                'success' => $baseUrl,
+                'failure' => $baseUrl,
+                'pending' => $baseUrl
+            ],
+            'auto_return' => 'approved',
+        ];
+
+        if ($user) {
+            $preferenceData['payer'] = ['email' => $user->email];
+            $preferenceData['external_reference'] = 'DONATION_' . $user->id;
+        }
+
+        $response = Http::withToken($token)->post('https://api.mercadopago.com/checkout/preferences', $preferenceData);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            return redirect()->away($data['init_point']);
+        }
+
+        // Return exact error for debugging
+        $errorDetail = $response->body();
+        \Illuminate\Support\Facades\Log::error('MercadoPago Error: ' . $errorDetail);
+
+        return redirect()->back()->with('error', 'Error de Mercado Pago: ' . $errorDetail);
+    }
 }

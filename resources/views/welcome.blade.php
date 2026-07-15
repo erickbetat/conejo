@@ -656,9 +656,16 @@
                     </div>
                     
                     <div class="w-full relative z-10">
-                        <a href="#contacto" class="inline-flex items-center justify-center w-full bg-transparent border-2 border-cyan-500/50 text-cyan-400 font-racing text-xl uppercase py-4 px-8 transition-all hover:bg-cyan-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
-                            Aportar
-                        </a>
+                        <form action="{{ route('donate') }}" method="POST" class="flex flex-col sm:flex-row gap-3">
+                            @csrf
+                            <div class="relative flex-grow">
+                                <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 font-bold">$</span>
+                                <input type="number" name="amount" min="10" placeholder="100" required class="w-full bg-brand-dark border-2 border-cyan-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-cyan-400 focus:ring-0 outline-none transition-all font-sans">
+                            </div>
+                            <button type="submit" class="inline-flex items-center justify-center bg-cyan-500/10 border-2 border-cyan-500 text-cyan-400 font-racing text-xl uppercase py-3 px-8 transition-all hover:bg-cyan-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                                Aportar
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -807,6 +814,22 @@
             
             <!-- Carrusel Infinito -->
             <div class="overflow-hidden relative w-full max-w-[100vw] mx-auto py-4">
+                @if(session('error'))
+                    <div class="fixed top-20 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-lg bg-red-600/90 border border-red-500 text-white px-6 py-4 rounded-xl shadow-2xl backdrop-blur-md flex justify-between items-center" id="toast-error">
+                        <span>{{ session('error') }}</span>
+                        <button onclick="document.getElementById('toast-error').style.display='none'" class="text-white hover:text-gray-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="fixed top-20 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-lg bg-green-600/90 border border-green-500 text-white px-6 py-4 rounded-xl shadow-2xl backdrop-blur-md flex justify-between items-center" id="toast-success">
+                        <span>{{ session('success') }}</span>
+                        <button onclick="document.getElementById('toast-success').style.display='none'" class="text-white hover:text-gray-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                @endif
                 <!-- Sombras en los bordes para un efecto de desvanecimiento -->
                 <div class="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-brand-black to-transparent z-10 pointer-events-none"></div>
                 <div class="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-brand-black to-transparent z-10 pointer-events-none"></div>

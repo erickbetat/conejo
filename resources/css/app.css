@@ -13,3 +13,13 @@ body {
     background-image: radial-gradient(circle at top right, rgba(230, 32, 32, 0.1), transparent 40%),
                       radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.02), transparent 40%);
 }
+
+/* Ocultar flechas en inputs numéricos */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Para Firefox */
+}
