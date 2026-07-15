@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BiographyController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\ProfileController;
 
 use App\Models\Biography;
 use App\Models\Content;
@@ -20,6 +21,7 @@ Route::get('/', function () {
     $merches = \App\Models\Merch::where('is_active', true)->orderBy('sort_order')->get();
     return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches'));
 });
+
 // Rutas de Ayuda/Técnicas
 Route::get('/crear-symlink', function () {
     try {
@@ -68,3 +70,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::post('/contacto', [\App\Http\Controllers\ContactController::class, 'store'])->name('contacto.store');
+
+// --- BREEZE USER ROUTES ---
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Suscripciones
+    Route::get('/subscribe/{plan}', [\App\Http\Controllers\SubscriptionController::class, 'subscribe'])->name('subscribe');
+});
+
+// Webhook de Mercado Pago
+Route::post('/webhooks/mercadopago', [\App\Http\Controllers\WebhookController::class, 'handleWebhook'])->name('webhook.mp');
+
+require __DIR__.'/auth.php';

@@ -1,0 +1,80 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-racing uppercase text-3xl tracking-widest text-white leading-tight">
+            Panel Exclusivo <span class="text-brand-red">Conejo Club</span>
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+            
+            <!-- Bienvenida -->
+            <div class="glass-panel p-6 border-l-4 border-brand-red">
+                <h3 class="text-xl font-bold text-white mb-2">¡Hola, {{ Auth::user()->name }}!</h3>
+                <p class="text-gray-400">Bienvenido a tu espacio privado. Aquí encontrarás todo el contenido exclusivo dependiendo de tu nivel de membresía en el Conejo Club.</p>
+            </div>
+
+            <!-- Verificación de Suscripción -->
+            @php
+                $user = Auth::user();
+                $hasActiveSubscription = $user->hasActiveSubscription(); 
+                $userPlan = $hasActiveSubscription ? $user->subscription->plan_name : 'Ninguno';
+            @endphp
+
+            @if(!$hasActiveSubscription)
+                <!-- Pantalla Bloqueada (No Suscrito) -->
+                <div class="glass-panel p-12 text-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-brand-red/5 z-0"></div>
+                    
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full bg-brand-dark border-2 border-brand-red/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(230,32,32,0.3)]">
+                            <svg class="w-10 h-10 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-3xl font-racing uppercase text-white mb-4">Contenido Bloqueado</h3>
+                        <p class="text-gray-400 max-w-lg mx-auto mb-8">Para acceder a videos exclusivos, detrás de escena de las carreras, y beneficios del equipo, necesitas una membresía activa del Conejo Club.</p>
+                        
+                        <a href="/#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-3 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 rounded-lg shadow-[0_0_20px_rgba(230,32,32,0.4)]">
+                            Ver Planes de Suscripción
+                        </a>
+                    </div>
+                </div>
+            @else
+                <!-- Pantalla Desbloqueada (Contenido Premium) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Tarjeta de Membresía Actual -->
+                    <div class="glass-panel p-6 bg-gradient-to-br from-brand-dark to-black border-yellow-500/30">
+                        <div class="text-sm text-gray-400 uppercase tracking-widest mb-1">Tu Membresía</div>
+                        <div class="text-3xl font-racing text-yellow-500 uppercase">{{ $userPlan }}</div>
+                        <div class="mt-4 text-sm text-gray-300">
+                            Estado: <span class="text-green-400 font-bold">Activa</span>
+                        </div>
+                    </div>
+
+                    <!-- Contenido Exclusivo 1 -->
+                    <div class="glass-panel overflow-hidden md:col-span-2 relative group cursor-pointer">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1541443131876-44b03de101c5?q=80&w=1000&auto=format&fit=crop');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                        
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="w-16 h-16 rounded-full bg-brand-red/90 flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(230,32,32,0.6)]">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-6">
+                            <div class="inline-block px-3 py-1 bg-brand-red text-white text-xs font-bold uppercase tracking-wider rounded-md mb-2">Exclusivo Oro</div>
+                            <h4 class="text-2xl font-racing text-white uppercase tracking-wide">Detrás de escena: Preparación F4</h4>
+                            <p class="text-sm text-gray-300 mt-1">Acompáñame en mi rutina de entrenamiento antes del Gran Premio.</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            
+        </div>
+    </div>
+</x-app-layout>

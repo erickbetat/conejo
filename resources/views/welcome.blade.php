@@ -95,8 +95,8 @@
     <nav class="fixed top-0 w-full z-50 bg-brand-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="/" class="flex items-center gap-3 transition-transform hover:scale-105">
-                <img src="{{ asset('images/logos/letrero-conejo2.png') }}" alt="Conejo Cantú" class="h-6 md:h-8 w-auto object-contain">
-                <img src="{{ asset('images/logos/logo1.png') }}" alt="Logo 88" class="h-10 md:h-12 w-auto object-contain">
+                <img src="{{ asset('images/logos/conejo-color.png') }}" alt="Conejo Cantú" class="h-6 md:h-8 w-auto object-contain">
+                <img src="{{ asset('images/logos/logo2.png') }}" alt="Logo 88" class="h-10 md:h-12 w-auto object-contain">
             </a>
             
             <div class="hidden md:flex items-center gap-8 font-medium">
@@ -104,6 +104,12 @@
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
                 <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Colaboradores</a>
                 <a href="#contacto" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Contacto</a>
+                
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest ml-4">Mi Cuenta</a>
+                @else
+                    <a href="{{ route('login') }}" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest ml-4">Login</a>
+                @endauth
                 
                 <!-- Redes Sociales -->
                 <a href="#" onclick="openSocialModal(event)" class="transition-transform hover:scale-110 border-l border-white/20 pl-8 ml-2 flex items-center">
@@ -285,10 +291,10 @@
                             <div class="inline-block px-3 py-1 bg-brand-red text-white text-xs font-bold uppercase tracking-widest rounded-md w-max shadow-lg shadow-brand-red/30">1er Lugar</div>
                             <div class="inline-block px-3 py-1 bg-white/10 text-brand-gray text-xs font-bold uppercase tracking-widest rounded-md w-max border border-white/5">Fórmula 4 México</div>
                         </div>
-                        <h3 class="text-5xl md:text-6xl font-racing text-white uppercase italic mb-2 leading-none">Gran Premio Ciudad de México</h3>
+                        <h3 class="text-5xl md:text-6xl font-racing text-white uppercase italic mb-2 leading-none">Gran Premio Fórmula 1 Ciudad de México</h3>
                         <p class="text-brand-gray text-xl uppercase tracking-widest mb-6">Autódromo Hermanos Rodríguez</p>
                         
-                        <p class="text-gray-400 font-light max-w-xl mb-8">Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio en el circuito más emblemático del país, frente a miles de aficionados al automovilismo.</p>
+                        <p class="text-gray-400 font-light max-w-xl mb-8">Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio de la <strong>Fórmula 4</strong> en el circuito más emblemático del país. Corriendo como categoría principal de soporte durante el fin de semana de la F1, Cristian demostró su talento y determinación frente a miles de aficionados al automovilismo.</p>
                         
                         <div class="flex flex-wrap gap-4">
                             <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">Pos:</span> P1</div>
@@ -388,9 +394,9 @@
                         
                         <!-- Contenido (Foto) -->
                         <div class="w-full md:w-5/12 pl-16 md:pl-0">
-                            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:shadow-[0_0_30px_rgba(230,32,32,0.2)] transition-all duration-500 transform group-hover:-translate-y-2">
+                            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:shadow-[0_0_30px_rgba(230,32,32,0.2)] transition-all duration-500 transform group-hover:-translate-y-2 bg-black/40 flex items-center justify-center">
                                 <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
-                                <img src="{{ asset('storage/' . $biography->{'photo_'.$i}) }}" alt="Momento {{ $i }}" class="w-full h-64 md:h-80 object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
+                                <img src="{{ asset('storage/' . $biography->{'photo_'.$i}) }}" alt="Momento {{ $i }}" class="w-full h-64 md:h-80 object-contain object-center grayscale group-hover:grayscale-0 transition-all duration-700 p-2">
                             </div>
                             
                             <!-- Texto (Aparece debajo en móvil, o al lado en desktop) -->
@@ -549,7 +555,7 @@
                             </li>
                         </ul>
                         
-                        <a href="#" class="block text-center w-full bg-white/5 border border-yellow-500/50 text-yellow-500 font-racing text-xl uppercase py-3 transition-colors hover:bg-yellow-500 hover:text-black rounded-xl">Unirse a Oro</a>
+                        <a href="{{ route('subscribe', ['plan' => 'oro']) }}" class="block text-center w-full bg-white/5 border border-yellow-500/50 text-yellow-500 font-racing text-xl uppercase py-3 transition-colors hover:bg-yellow-500 hover:text-black rounded-xl">Unirse a Oro</a>
                     </div>
                 </div>
 
@@ -560,7 +566,7 @@
                     
                     <div class="p-8 pb-0 relative z-10">
                         <h4 class="text-2xl font-racing uppercase text-gray-300 mb-1">Club Titanio</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_titanio_price']->value ?? 760) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
+                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_titanio_price']->value ?? 788) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
                         <p class="text-sm text-gray-300 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
@@ -588,8 +594,7 @@
                                 Un conejo kit de regalo al cumplir 1 año (entrega gratis en México).
                             </li>
                         </ul>
-                        
-                        <a href="#" class="block text-center w-full bg-gray-300 text-brand-black font-racing text-xl uppercase py-3 transition-colors hover:bg-white rounded-xl shadow-[0_0_15px_rgba(156,163,175,0.4)]">Unirse a Titanio</a>
+                        <a href="{{ route('subscribe', ['plan' => 'titanio']) }}" class="block text-center w-full bg-gray-300 text-brand-black font-racing text-xl uppercase py-3 transition-colors hover:bg-white rounded-xl shadow-[0_0_15px_rgba(156,163,175,0.4)]">Unirse a Titanio</a>
                     </div>
                 </div>
 
@@ -733,18 +738,18 @@
                 <div class="mb-16 flex flex-col items-center">
                     <!-- Primer lugar (Centro arriba) -->
                     @if($featuredPartners->has(0))
-                        <div class="animate-float w-full max-w-xl bg-brand-dark/60 backdrop-blur-md border-2 border-brand-red/50 hover:border-brand-red hover:bg-white/10 rounded-2xl p-12 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(230,32,32,0.3)] group relative overflow-hidden flex items-center justify-center min-h-[350px] mb-8 z-20">
+                        <div class="animate-float w-full max-w-3xl bg-brand-dark/60 backdrop-blur-md border-2 border-brand-red/50 hover:border-brand-red hover:bg-white/10 rounded-2xl p-6 md:p-8 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(230,32,32,0.3)] group relative overflow-hidden flex items-center justify-center min-h-[380px] md:min-h-[450px] mb-8 z-20">
                             <div class="absolute top-0 right-0 w-48 h-48 bg-brand-red/30 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="absolute top-4 left-1/2 transform -translate-x-1/2">
                                 <span class="text-brand-red text-sm font-bold uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full border border-brand-red/30">Premium Partner</span>
                             </div>
-                            <div class="w-full transition-transform duration-500 group-hover:scale-110 relative z-10 flex justify-center">
+                            <div class="w-full transition-transform duration-500 group-hover:scale-105 relative z-10 flex justify-center mt-4">
                                 @if($featuredPartners[0]->url)
                                     <a href="{{ $featuredPartners[0]->url }}" target="_blank" rel="noopener noreferrer" class="block w-full flex justify-center">
-                                        <img src="{{ asset('storage/' . $featuredPartners[0]->logo_path) }}" alt="{{ $featuredPartners[0]->name }}" class="w-auto h-auto object-contain max-h-56 max-w-[90%] drop-shadow-2xl">
+                                        <img src="{{ asset('storage/' . $featuredPartners[0]->logo_path) }}" alt="{{ $featuredPartners[0]->name }}" class="w-auto h-auto object-contain max-h-96 max-w-full drop-shadow-2xl">
                                     </a>
                                 @else
-                                    <img src="{{ asset('storage/' . $featuredPartners[0]->logo_path) }}" alt="{{ $featuredPartners[0]->name }}" class="w-auto h-auto object-contain max-h-56 max-w-[90%] drop-shadow-2xl">
+                                    <img src="{{ asset('storage/' . $featuredPartners[0]->logo_path) }}" alt="{{ $featuredPartners[0]->name }}" class="w-auto h-auto object-contain max-h-96 max-w-full drop-shadow-2xl">
                                 @endif
                             </div>
                             <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
