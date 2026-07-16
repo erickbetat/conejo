@@ -18,6 +18,13 @@ class ContactController extends Controller
 
         ContactMessage::create($validated);
 
+        try {
+            \Illuminate\Support\Facades\Mail::to('contacto@conejocantu.com')->send(new \App\Mail\ContactFormMail($validated));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Error enviando correo de contacto: ' . $e->getMessage());
+            return back()->with('error', 'Error técnico del correo: ' . $e->getMessage());
+        }
+
         return back()->with('contact_success', '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.')->withFragment('contacto');
     }
 }

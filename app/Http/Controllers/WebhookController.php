@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ThankYouMail;
 
 class WebhookController extends Controller
 {
@@ -51,6 +53,40 @@ class WebhookController extends Controller
                                 'status' => $status === 'authorized' ? 'active' : 'cancelled'
                             ]
                         );
+                        // Enviar correo de bienvenida si se acaba de autorizar
+                        if ($status === 'authorized') {
+                            try {
+                                Mail::to($user->email)->send(new ThankYouMail([
+                                    'name' => $user->name,
+                                    'plan' => $planName !== 'Ninguno' ? $planName : $reason,
+                                    'is_subscription' => true,
+                                ]));
+                            } catch (\Exception $e) {
+                                Log::error('Error enviando email de bienvenida: ' . $e->getMessage());
+                            }
+                        }
+                    }
+                }
+            }
+        } elseif ($type === 'payment') {
+            // Manejar pagos únicos (Aportación Libre)
+            $response = Http::withToken($token)->get("https://api.mercadopago.com/v1/payments/{$id}");
+            
+            if ($response->successful()) {
+                $data = $response->json();
+                $status = $data['status'];
+                $payerEmail = $data['payer']['email'] ?? null;
+                $description = $data['description'] ?? 'Aportación';
+                
+                if ($status === 'approved' && $payerEmail) {
+                    try {
+                        Mail::to($payerEmail)->send(new ThankYouMail([
+                            'name' => 'Amigo/a', // Mercado Pago payments api might not give name directly depending on integration
+                            'plan' => $description,
+                            'is_subscription' => false,
+                        ]));
+                    } catch (\Exception $e) {
+                        Log::error('Error enviando email de donación: ' . $e->getMessage());
                     }
                 }
             }

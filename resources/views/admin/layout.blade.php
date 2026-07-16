@@ -162,6 +162,18 @@
     </style>
 </head>
 <body>
+    @if(session('success'))
+        <div class="alert" style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); color: #4ade80; text-align: center; max-width: 1200px; margin: 1rem auto 0 auto; width: 90%;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-error" style="text-align: center; max-width: 1200px; margin: 1rem auto 0 auto; width: 90%;">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @yield('content')
 </body>
 </html>

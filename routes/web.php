@@ -66,6 +66,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Rutas de Contacto
         Route::resource('/contacts', \App\Http\Controllers\Admin\ContactMessageController::class)->only(['index', 'show', 'destroy']);
+        
+        // Botón de Test de Email
+        Route::post('/test-email', function () {
+            try {
+                \Illuminate\Support\Facades\Mail::to('contacto@conejocantu.com')->send(new \App\Mail\ThankYouMail([
+                    'name' => 'Piloto de Pruebas',
+                    'plan' => 'Membresía de Prueba',
+                    'is_subscription' => true,
+                ]));
+                return back()->with('success', '¡Correo de prueba enviado con éxito a contacto@conejocantu.com!');
+            } catch (\Exception $e) {
+                return back()->with('error', 'Error al enviar: ' . $e->getMessage());
+            }
+        })->name('test.email');
     });
 });
 

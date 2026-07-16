@@ -86,6 +86,17 @@
             <a href="{{ route('admin.contacts.index') }}" class="btn" style="text-decoration: none; background: var(--color-white); color: var(--color-black);">Ver Bandeja</a>
         </div>
 
+        <div class="glass-panel" style="padding: 2rem; border-color: rgba(230, 32, 32, 0.4);">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">🛠</span> Herramientas
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Prueba que el sistema de envío de correos esté funcionando correctamente.</p>
+            <form action="{{ route('admin.test.email') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn" style="background: var(--color-red); color: white; cursor: pointer; width: 100%;">Enviar Correo de Prueba</button>
+            </form>
+        </div>
+
     </div>
 </div>
 @endsection
