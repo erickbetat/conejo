@@ -288,17 +288,17 @@
                 <div class="grid grid-cols-1 md:grid-cols-3">
                     <div class="p-10 md:col-span-2 flex flex-col justify-center">
                         <div class="flex flex-wrap items-center gap-3 mb-4">
-                            <div class="inline-block px-3 py-1 bg-brand-red text-white text-xs font-bold uppercase tracking-widest rounded-md w-max shadow-lg shadow-brand-red/30">1er Lugar</div>
-                            <div class="inline-block px-3 py-1 bg-white/10 text-brand-gray text-xs font-bold uppercase tracking-widest rounded-md w-max border border-white/5">Fórmula 4 México</div>
+                            <div class="inline-block px-3 py-1 bg-brand-red text-white text-xs font-bold uppercase tracking-widest rounded-md w-max shadow-lg shadow-brand-red/30">{{ $featuredRace ? $featuredRace->badge : '1er Lugar' }}</div>
+                            <div class="inline-block px-3 py-1 bg-white/10 text-brand-gray text-xs font-bold uppercase tracking-widest rounded-md w-max border border-white/5">{{ $featuredRace ? $featuredRace->category : 'Fórmula 4 México' }}</div>
                         </div>
-                        <h3 class="text-5xl md:text-6xl font-racing text-white uppercase italic mb-2 leading-none">Gran Premio Fórmula 1 Ciudad de México</h3>
-                        <p class="text-brand-gray text-xl uppercase tracking-widest mb-6">Autódromo Hermanos Rodríguez</p>
+                        <h3 class="text-5xl md:text-6xl font-racing text-white uppercase italic mb-2 leading-none">{{ $featuredRace ? $featuredRace->title : 'Gran Premio Fórmula 1 Ciudad de México' }}</h3>
+                        <p class="text-brand-gray text-xl uppercase tracking-widest mb-6">{{ $featuredRace ? $featuredRace->location : 'Autódromo Hermanos Rodríguez' }}</p>
                         
-                        <p class="text-gray-400 font-light max-w-xl mb-8">Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio de la <strong>Fórmula 4</strong> en el circuito más emblemático del país. Corriendo como categoría principal de soporte durante el fin de semana de la F1, Cristian demostró su talento y determinación frente a miles de aficionados al automovilismo. Saliendo desde los pits por una falla mecánica logra ganar ambas carreras.</p>
+                        <p class="text-gray-400 font-light max-w-xl mb-8">{!! $featuredRace ? nl2br(e($featuredRace->description)) : 'Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio de la <strong>Fórmula 4</strong> en el circuito más emblemático del país. Corriendo como categoría principal de soporte durante el fin de semana de la F1, Cristian demostró su talento y determinación frente a miles de aficionados al automovilismo. Saliendo desde los pits por una falla mecánica logra ganar ambas carreras.' !!}</p>
                         
                         <div class="flex flex-wrap gap-4">
-                            <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">Pos:</span> P1</div>
-                            <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">V. Rápida:</span> Récord Pista</div>
+                            <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">{{ $featuredRace ? $featuredRace->stat1_label : 'Pos:' }}</span> {{ $featuredRace ? $featuredRace->stat1_value : 'P1' }}</div>
+                            <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">{{ $featuredRace ? $featuredRace->stat2_label : 'V. Rápida:' }}</span> {{ $featuredRace ? $featuredRace->stat2_value : 'Récord Pista' }}</div>
                         </div>
                     </div>
                     
@@ -307,19 +307,36 @@
                         <div class="absolute inset-0 bg-brand-red/10 mix-blend-overlay"></div>
                         
                         <div class="z-10 w-full h-full flex flex-col gap-4 p-4">
-                            <!-- Placeholder Video -->
-                            <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group">
-                                <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
-                                <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
-                            </div>
+                            @if($featuredRace && $featuredRace->video_path)
+                                <a href="{{ asset('storage/' . $featuredRace->video_path) }}" target="_blank" class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group" style="text-decoration: none;">
+                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
+                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Ver Video</span>
+                                </a>
+                            @elseif($featuredRace && $featuredRace->video_url)
+                                <a href="{{ $featuredRace->video_url }}" target="_blank" class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group" style="text-decoration: none;">
+                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
+                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
+                                </a>
+                            @else
+                                <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group">
+                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
+                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
+                                </div>
+                            @endif
                             
-                            <!-- Placeholder Foto Podio -->
-                            <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group overflow-hidden relative">
-                                <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 via-blue-500/10 to-red-500/10 opacity-30"></div>
-                                <div class="absolute inset-0 bg-gradient-to-bl from-green-500/10 via-white/10 to-red-500/10 opacity-30"></div>
-                                <span class="text-4xl mb-2 group-hover:scale-110 transition-transform relative z-10">📸</span>
-                                <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center relative z-10 px-2">Foto Podio<br><span class="text-xs normal-case text-gray-500 mt-1 block">(Banderas Colombia y México)</span></span>
-                            </div>
+                            @if($featuredRace && $featuredRace->image_path)
+                                <div class="w-full border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 overflow-hidden relative group">
+                                    <img src="{{ asset('storage/' . $featuredRace->image_path) }}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" alt="Podio">
+                                </div>
+                            @else
+                                <!-- Placeholder Foto Podio -->
+                                <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group overflow-hidden relative">
+                                    <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 via-blue-500/10 to-red-500/10 opacity-30"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-bl from-green-500/10 via-white/10 to-red-500/10 opacity-30"></div>
+                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform relative z-10">📸</span>
+                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center relative z-10 px-2">Foto Podio<br><span class="text-xs normal-case text-gray-500 mt-1 block">(Banderas Colombia y México)</span></span>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

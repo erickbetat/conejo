@@ -66,6 +66,14 @@
 
         <div class="glass-panel" style="padding: 2rem;">
             <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">🏁</span> Carrera Destacada
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Modifica el texto, la foto del podio y el video de la carrera principal.</p>
+            <a href="{{ route('admin.featured-race.edit') }}" class="btn" style="text-decoration: none;">Editar Carrera</a>
+        </div>
+
+        <div class="glass-panel" style="padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
                 <span style="color: var(--color-red); font-size: 1.5rem;">⚙</span> Configuraciones
             </h2>
             <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Modifica textos principales, estadísticas, y precios del club.</p>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BiographyController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\BirthdayController;
+use App\Http\Controllers\Admin\FeaturedRaceController;
 use App\Http\Controllers\ProfileController;
 
 use App\Models\Biography;
@@ -20,7 +21,8 @@ Route::get('/', function () {
     $partners = \App\Models\Partner::where('is_active', true)->orderBy('sort_order')->get();
     $settings = \App\Models\Setting::all()->keyBy('key');
     $merches = \App\Models\Merch::where('is_active', true)->orderBy('sort_order')->get();
-    return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches'));
+    $featuredRace = \App\Models\FeaturedRace::first();
+    return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches', 'featuredRace'));
 });
 
 // Rutas de Ayuda/Técnicas
@@ -51,6 +53,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Biografía
         Route::get('/biography', [BiographyController::class, 'edit'])->name('biography.edit');
         Route::post('/biography', [BiographyController::class, 'update'])->name('biography.update');
+
+        // Carrera Destacada
+        Route::get('/featured-race', [FeaturedRaceController::class, 'edit'])->name('featured-race.edit');
+        Route::post('/featured-race', [FeaturedRaceController::class, 'update'])->name('featured-race.update');
 
         // Contenido (Noticias/Posts)
         Route::resource('/content', ContentController::class)->except(['show']);
