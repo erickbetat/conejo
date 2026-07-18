@@ -85,6 +85,14 @@
             <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Lee y administra los correos y mensajes de tus colaboradores.</p>
             <a href="{{ route('admin.contacts.index') }}" class="btn" style="text-decoration: none; background: var(--color-white); color: var(--color-black);">Ver Bandeja</a>
         </div>
+        <div class="glass-panel" style="padding: 2rem; border-color: rgba(230, 32, 32, 0.4);">
+            <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--color-red); font-size: 1.5rem;">🎂</span> Cumpleaños
+            </h2>
+            <p style="color: var(--color-gray); margin-bottom: 1.5rem;">Consulta los próximos cumpleaños de los miembros de Conejo Club.</p>
+            <a href="{{ route('admin.birthdays.index') }}" class="btn" style="text-decoration: none;">Ver Calendario</a>
+        </div>
+
 
         <div class="glass-panel" style="padding: 2rem; border-color: rgba(230, 32, 32, 0.4);">
             <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">

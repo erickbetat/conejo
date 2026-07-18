@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BiographyController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\BirthdayController;
 use App\Http\Controllers\ProfileController;
 
 use App\Models\Biography;
@@ -56,6 +57,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Aliados / Socios
         Route::resource('/partners', PartnerController::class)->except(['show']);
+        
+        // Cumpleaños
+        Route::get('/birthdays', [BirthdayController::class, 'index'])->name('birthdays.index');
         
         // Rutas de Configuración del Sistema
         Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');

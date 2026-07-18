@@ -21,6 +21,13 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-brand-red" />
         </div>
 
+        <!-- Birthdate (Optional) -->
+        <div class="mt-6">
+            <label for="birthdate" class="block font-medium text-sm text-gray-300">Fecha de Nacimiento <span class="text-xs text-gray-500 italic">(Opcional - Para felicitarte)</span></label>
+            <input id="birthdate" class="block mt-1 w-full bg-brand-black/50 border border-gray-600 focus:border-brand-red focus:ring focus:ring-brand-red/30 rounded-lg text-white py-2 px-3 placeholder-gray-500" type="date" name="birthdate" :value="old('birthdate')" />
+            <x-input-error :messages="$errors->get('birthdate')" class="mt-2 text-brand-red" />
+        </div>
+
         <!-- Password -->
         <div class="mt-6">
             <label for="password" class="block font-medium text-sm text-gray-300">Contraseña</label>

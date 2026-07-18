@@ -102,7 +102,7 @@
             <div class="hidden md:flex items-center gap-8 font-medium">
                 <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
-                <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Colaboradores</a>
+                <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Partners</a>
                 <a href="#contacto" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Contacto</a>
                 
                 @auth
@@ -116,12 +116,12 @@
                     <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
                 </a>
 
-                <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 pulse-glow" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme al Club</a>
+                <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 pulse-glow" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme a Conejo Club</a>
             </div>
             
             <!-- Menú Móvil Simple -->
             <div class="md:hidden">
-                <a href="#suscripciones" class="bg-brand-red text-white px-4 py-2 rounded-full text-xs uppercase font-bold tracking-wider">Unirme</a>
+                <a href="#suscripciones" class="bg-brand-red text-white px-4 py-2 rounded-full text-xs uppercase font-bold tracking-wider">Unirme a Conejo Club</a>
             </div>
         </div>
     </nav>
@@ -294,7 +294,7 @@
                         <h3 class="text-5xl md:text-6xl font-racing text-white uppercase italic mb-2 leading-none">Gran Premio Fórmula 1 Ciudad de México</h3>
                         <p class="text-brand-gray text-xl uppercase tracking-widest mb-6">Autódromo Hermanos Rodríguez</p>
                         
-                        <p class="text-gray-400 font-light max-w-xl mb-8">Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio de la <strong>Fórmula 4</strong> en el circuito más emblemático del país. Corriendo como categoría principal de soporte durante el fin de semana de la F1, Cristian demostró su talento y determinación frente a miles de aficionados al automovilismo.</p>
+                        <p class="text-gray-400 font-light max-w-xl mb-8">Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio de la <strong>Fórmula 4</strong> en el circuito más emblemático del país. Corriendo como categoría principal de soporte durante el fin de semana de la F1, Cristian demostró su talento y determinación frente a miles de aficionados al automovilismo. Saliendo desde los pits por una falla mecánica logra ganar ambas carreras.</p>
                         
                         <div class="flex flex-wrap gap-4">
                             <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">Pos:</span> P1</div>
@@ -302,13 +302,25 @@
                         </div>
                     </div>
                     
-                    <div class="bg-white/5 border-l border-white/5 p-10 flex flex-col items-center justify-center relative overflow-hidden min-h-[250px] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+                    <div class="bg-white/5 border-l border-white/5 p-4 flex flex-col items-center justify-center relative overflow-hidden min-h-[250px] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
                         <!-- Red glow effect -->
                         <div class="absolute inset-0 bg-brand-red/10 mix-blend-overlay"></div>
-                        <div class="absolute w-32 h-32 bg-brand-red rounded-full blur-[60px] opacity-20"></div>
                         
-                        <!-- Trophy Graphic -->
-                        <div class="text-[8rem] leading-none transform rotate-12 filter drop-shadow-2xl z-10 select-none">🏆</div>
+                        <div class="z-10 w-full h-full flex flex-col gap-4 p-4">
+                            <!-- Placeholder Video -->
+                            <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group">
+                                <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
+                                <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
+                            </div>
+                            
+                            <!-- Placeholder Foto Podio -->
+                            <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group overflow-hidden relative">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 via-blue-500/10 to-red-500/10 opacity-30"></div>
+                                <div class="absolute inset-0 bg-gradient-to-bl from-green-500/10 via-white/10 to-red-500/10 opacity-30"></div>
+                                <span class="text-4xl mb-2 group-hover:scale-110 transition-transform relative z-10">📸</span>
+                                <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center relative z-10 px-2">Foto Podio<br><span class="text-xs normal-case text-gray-500 mt-1 block">(Banderas Colombia y México)</span></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -386,22 +398,38 @@
                 <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-red via-red-900 to-transparent hidden md:block opacity-50 shadow-[0_0_15px_rgba(230,32,32,0.8)]"></div>
                 <div class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-red via-red-900 to-transparent md:hidden opacity-50"></div>
 
+                @php
+                    $defaultTexts = [
+                        1 => 'Inicia su carrera profesonal a los 9 años quedando campeón de la zona norte del país.',
+                        2 => 'Viajando desde Torreón a toda la República Mexicana para poder practicar y competir en nacionales, ya que donde vive no hay ninguna pista.',
+                        3 => 'A los 15 años se va a vivir solo a España para continuar con su carrera deportiva enfrentándose a nuevos retos tanto dentro como fuera de la pista.'
+                    ];
+                @endphp
                 @for($i = 1; $i <= 3; $i++)
-                    @if($biography->{'photo_'.$i})
+                    @if($biography->{'photo_'.$i} || true)
                     <div class="relative flex items-center justify-between md:justify-normal md:even:flex-row-reverse group w-full mb-16 md:mb-24 fade-timeline-item opacity-0 translate-y-12 transition-all duration-1000 ease-out">
                         <!-- Punto central (Timeline node) -->
                         <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-black border-4 border-brand-red rounded-full z-20 group-hover:bg-brand-red transition-colors duration-300 shadow-[0_0_15px_rgba(230,32,32,0.8)]"></div>
                         
                         <!-- Contenido (Foto) -->
                         <div class="w-full md:w-5/12 pl-16 md:pl-0">
-                            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:shadow-[0_0_30px_rgba(230,32,32,0.2)] transition-all duration-500 transform group-hover:-translate-y-2 bg-black/40 flex items-center justify-center">
+                            <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:shadow-[0_0_30px_rgba(230,32,32,0.2)] transition-all duration-500 transform group-hover:-translate-y-2 bg-black/40 flex items-center justify-center min-h-[16rem] md:min-h-[20rem]">
                                 <div class="absolute inset-0 bg-brand-red/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
-                                <img src="{{ asset('storage/' . $biography->{'photo_'.$i}) }}" alt="Momento {{ $i }}" class="w-full h-64 md:h-80 object-contain object-center grayscale group-hover:grayscale-0 transition-all duration-700 p-2">
+                                @if($biography->{'photo_'.$i})
+                                    <img src="{{ asset('storage/' . $biography->{'photo_'.$i}) }}" alt="Momento {{ $i }}" class="w-full h-64 md:h-80 object-contain object-center grayscale group-hover:grayscale-0 transition-all duration-700 p-2 relative z-20">
+                                @else
+                                    <div class="text-center relative z-20 opacity-50 p-4">
+                                        <span class="text-5xl block mb-3">📸</span>
+                                        <span class="text-gray-400 font-racing uppercase tracking-widest text-sm block">
+                                            @if($i == 2) (Poner foto en Karts) @elseif($i == 3) (Poner foto F3/F4) @else Espacio para foto @endif
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
                             
                             <!-- Texto (Aparece debajo en móvil, o al lado en desktop) -->
                             <div class="mt-6 md:hidden text-gray-300 font-light text-lg">
-                                {{ $biography->{'desc_'.$i} }}
+                                {{ $biography->{'desc_'.$i} ?: $defaultTexts[$i] }}
                             </div>
                         </div>
 
@@ -414,7 +442,7 @@
                                 <div class="absolute top-0 left-0 w-1 h-full bg-brand-red"></div>
                                 <h4 class="text-brand-red font-racing text-xl uppercase tracking-widest mb-3">Momento Clave</h4>
                                 <p class="text-gray-300 font-light text-xl leading-relaxed">
-                                    {{ $biography->{'desc_'.$i} }}
+                                    {{ $biography->{'desc_'.$i} ?: $defaultTexts[$i] }}
                                 </p>
                             </div>
                         </div>
@@ -647,7 +675,7 @@
                     
                     <div class="relative z-10 flex-grow mb-8">
                         <div class="flex items-center gap-3 mb-2">
-                            <h4 class="text-3xl font-racing uppercase text-cyan-400 tracking-wide">Club Diamante</h4>
+                            <h4 class="text-3xl font-racing uppercase text-cyan-400 tracking-wide">Club Apex</h4>
                         </div>
                         <div class="font-racing text-2xl text-white mb-4">Aportación Única</div>
                         <p class="text-gray-400 text-sm font-light leading-relaxed">
@@ -742,7 +770,7 @@
                 <div class="hidden md:block absolute top-1/2 right-0 w-1/4 h-[1px] bg-gradient-to-l from-transparent to-brand-red/40 transform -translate-y-1/2"></div>
                 
                 <div class="inline-block px-6 py-2 border border-brand-red/30 bg-brand-red/5 text-brand-red text-sm font-bold uppercase tracking-widest rounded-full mb-6 shadow-[0_0_15px_rgba(230,32,32,0.1)]">Aliados Estratégicos</div>
-                <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-6 uppercase italic">Nuestros <span class="text-brand-red">Colaboradores</span></h2>
+                <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-6 uppercase italic">Nuestros <span class="text-brand-red">Partners</span></h2>
                 <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">Marcas e instituciones que hacen posible este sueño y aceleran junto a nosotros hacia la cima.</p>
             </div>
             
@@ -1118,7 +1146,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             // --- Animación Typewriter ---
-            const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de Fórmula 3. Acompáñame hacia lo más alto del podio.' }}";
+            const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de Fórmula 3. Recorramos este camino juntos.' }}";
             const textElement = document.getElementById('typewriter-text');
             const buttonsElement = document.getElementById('hero-buttons');
             let typeIndex = 0;

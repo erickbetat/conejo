@@ -19,7 +19,12 @@ class ContactController extends Controller
         ContactMessage::create($validated);
 
         try {
-            \Illuminate\Support\Facades\Mail::to('contacto@conejocantu.com')->send(new \App\Mail\ContactFormMail($validated));
+            // Puedes agregar más correos separándolos por comas dentro de este arreglo
+            $destinatarios = [
+                'contacto@conejocantu.com',
+                // 'otrodireccion@ejemplo.com'
+            ];
+            \Illuminate\Support\Facades\Mail::to($destinatarios)->send(new \App\Mail\ContactFormMail($validated));
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Log::error('Error enviando correo de contacto: ' . $e->getMessage());
             return back()->with('error', 'Error técnico del correo: ' . $e->getMessage());
