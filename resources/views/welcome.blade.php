@@ -457,6 +457,14 @@
             @if($sections->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
                 @foreach($sections as $index => $section)
+                    @php
+                        $isPremium = str_contains(strtolower($section->title), 'inedit') || str_contains(strtolower($section->title), 'inédit');
+                        $hasAccess = auth()->check() && auth()->user()->hasActiveSubscription();
+                    @endphp
+
+                    @if($isPremium && !$hasAccess)
+                        @continue
+                    @endif
                     <div class="bg-brand-dark border border-white/5 rounded-2xl overflow-hidden flex flex-col hover:border-white/10 transition-colors group">
                         @if($section->image_path)
                             <div class="w-full h-64 relative overflow-hidden">
