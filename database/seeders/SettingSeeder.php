@@ -19,7 +19,7 @@ class SettingSeeder extends Seeder
             ['key' => 'stats_anios', 'value' => '10', 'type' => 'number', 'description' => 'Años de experiencia'],
             
             // Hero
-            ['key' => 'hero_typewriter', 'value' => 'Piloto profesional de karting,Campeón Nacional 2023,Orgullo Mexicano', 'type' => 'text', 'description' => 'Texto que aparece como máquina de escribir (separado por comas)'],
+            ['key' => 'hero_typewriter', 'value' => 'Piloto profesional de fórmula 3,Campeón Nacional 2023,Orgullo Mexicano', 'type' => 'text', 'description' => 'Texto que aparece como máquina de escribir (separado por comas)'],
             
             // Membresías
             ['key' => 'club_oro_price', 'value' => '188', 'type' => 'number', 'description' => 'Precio del Club Oro (MXN)'],
