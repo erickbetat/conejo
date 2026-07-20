@@ -22,9 +22,9 @@ class SettingSeeder extends Seeder
             ['key' => 'hero_typewriter', 'value' => 'Piloto profesional de karting,Campeón Nacional 2023,Orgullo Mexicano', 'type' => 'text', 'description' => 'Texto que aparece como máquina de escribir (separado por comas)'],
             
             // Membresías
-            ['key' => 'club_oro_price', 'value' => '180', 'type' => 'number', 'description' => 'Precio del Club Oro (MXN)'],
-            ['key' => 'club_titanio_price', 'value' => '760', 'type' => 'number', 'description' => 'Precio del Club Titanio (MXN)'],
-            ['key' => 'club_elite_price', 'value' => '1880', 'type' => 'number', 'description' => 'Precio del Club Élite (MXN)'],
+            ['key' => 'club_oro_price', 'value' => '188', 'type' => 'number', 'description' => 'Precio del Club Oro (MXN)'],
+            ['key' => 'club_titanio_price', 'value' => '788', 'type' => 'number', 'description' => 'Precio del Club Titanio (MXN)'],
+            ['key' => 'club_elite_price', 'value' => '1888', 'type' => 'number', 'description' => 'Precio del Club Élite (MXN)'],
             
             // Redes Sociales y Contacto
             ['key' => 'whatsapp_number', 'value' => '5218112345678', 'type' => 'text', 'description' => 'Número de WhatsApp con código de país'],
