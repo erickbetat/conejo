@@ -385,7 +385,7 @@
                         <h3 class="text-5xl md:text-7xl font-racing mb-8 leading-none uppercase italic text-white drop-shadow-lg">El Piloto <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Detrás del Casco</span></h3>
                         
                         <div class="prose prose-invert prose-lg prose-p:text-gray-300 prose-p:leading-relaxed max-w-none font-light relative z-10">
-                            {!! nl2br(e($biography->content)) !!}
+                            {!! nl2br(e(str_ireplace('karting', 'fórmula 3', $biography->content))) !!}
                         </div>
                         
                         <!-- Footer de Biografía decorativo -->
@@ -1171,7 +1171,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             // --- Animación Typewriter ---
-            const textToType = "{{ $settings['hero_typewriter']->value ?? 'Piloto profesional de Fórmula 3. Recorramos este camino juntos.' }}";
+            const textToType = "{{ str_ireplace('karting', 'fórmula 3', $settings['hero_typewriter']->value ?? 'Piloto profesional de Fórmula 3,Campeón Nacional 2023,Orgullo Mexicano') }}";
             const textElement = document.getElementById('typewriter-text');
             const buttonsElement = document.getElementById('hero-buttons');
             let typeIndex = 0;
