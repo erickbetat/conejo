@@ -14,7 +14,16 @@ class ContactController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:50',
             'message' => 'required|string|max:2000',
+            'captcha' => 'required|in:8,ocho,OCHO,Ocho',
+        ], [
+            'captcha.in' => 'La respuesta a la pregunta de seguridad es incorrecta.',
         ]);
+
+        // Honeypot check: si el campo oculto "website_url" tiene valor, es un bot.
+        // Fingimos que se envió correctamente para engañar al bot.
+        if ($request->filled('website_url')) {
+            return back()->with('contact_success', '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.')->withFragment('contacto');
+        }
 
         ContactMessage::create($validated);
 

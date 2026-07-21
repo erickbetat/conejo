@@ -982,6 +982,12 @@
                 <form action="{{ route('contacto.store') }}" method="POST" class="space-y-6">
                     @csrf
                     
+                    <!-- Honeypot oculto para bots -->
+                    <div style="display:none;">
+                        <label for="website_url">Deja este campo vacío si eres humano</label>
+                        <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Nombre -->
                         <div class="space-y-2">
@@ -1010,6 +1016,13 @@
                         <label for="message" class="text-white/80 font-racing uppercase tracking-wider text-sm">Tu Mensaje *</label>
                         <textarea id="message" name="message" rows="5" required class="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300 resize-y" placeholder="Cuéntanos en qué te gustaría colaborar..."></textarea>
                         @error('message') <span class="text-brand-red text-xs">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Captcha Matemático Simple -->
+                    <div class="space-y-2 pb-2">
+                        <label for="captcha" class="text-white/80 font-racing uppercase tracking-wider text-sm">Seguridad: ¿Cuánto es 5 + 3? *</label>
+                        <input type="text" id="captcha" name="captcha" required class="w-full md:w-1/2 bg-black/40 border border-white/10 rounded-xl px-5 py-3 text-white placeholder-white/30 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300" placeholder="Escribe tu respuesta numérica (ej. 8)">
+                        @error('captcha') <span class="text-brand-red text-xs">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Botón -->
