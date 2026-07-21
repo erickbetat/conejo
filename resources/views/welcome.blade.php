@@ -706,7 +706,6 @@
                         <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
                             ¿Quieres apoyar aún más al proyecto? Te dejamos la puerta abierta para que tú decidas el monto. ¡Cualquier aportación suma para llegar a lo más alto!
                         </p>
-                        <div class="mb-4 font-bold text-cyan-400 text-sm italic">+ Incluye todos los beneficios del Club Élite</div>
                     </div>
                     
                     <div class="w-full relative z-10">
