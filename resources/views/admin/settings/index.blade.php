@@ -87,6 +87,27 @@
                         <label>{{ $settings['whatsapp_message']->description }}</label>
                         <input type="text" name="whatsapp_message" value="{{ $settings['whatsapp_message']->value }}" required>
                     </div>
+                    <h2 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-red); font-size: 1.3rem;">Redes Sociales (Enlaces)</h2>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['social_instagram']->description ?? 'Enlace de Instagram' }}</label>
+                        <input type="url" name="social_instagram" value="{{ $settings['social_instagram']->value ?? '' }}" placeholder="https://instagram.com/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['social_facebook']->description ?? 'Enlace de Facebook' }}</label>
+                        <input type="url" name="social_facebook" value="{{ $settings['social_facebook']->value ?? '' }}" placeholder="https://facebook.com/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['social_youtube']->description ?? 'Enlace de YouTube' }}</label>
+                        <input type="url" name="social_youtube" value="{{ $settings['social_youtube']->value ?? '' }}" placeholder="https://youtube.com/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['social_tiktok']->description ?? 'Enlace de TikTok' }}</label>
+                        <input type="url" name="social_tiktok" value="{{ $settings['social_tiktok']->value ?? '' }}" placeholder="https://tiktok.com/...">
+                    </div>
                 </div>
 
             </div>
