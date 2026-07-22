@@ -25,7 +25,7 @@
     @endif
 
     <div class="glass-panel" style="padding: 2rem;">
-        <form action="{{ route('admin.settings.update') }}" method="POST">
+        <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem;">
@@ -49,11 +49,36 @@
                         <input type="number" name="stats_anios" value="{{ $settings['stats_anios']->value }}" required>
                     </div>
 
-                    <h2 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-red); font-size: 1.3rem;">Textos Principales</h2>
+                    <h2 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-red); font-size: 1.3rem;">Sección Principal (Inicio)</h2>
                     
                     <div class="form-group">
-                        <label>{{ $settings['hero_typewriter']->description }}</label>
-                        <input type="text" name="hero_typewriter" value="{{ $settings['hero_typewriter']->value }}" required>
+                        <label>{{ $settings['hero_badge']->description ?? 'Etiqueta Superior Roja' }}</label>
+                        <input type="text" name="hero_badge" value="{{ $settings['hero_badge']->value ?? 'PILOTO DE FÓRMULA 3' }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ $settings['hero_typewriter']->description ?? 'Texto Animado (Máquina de escribir)' }}</label>
+                        <input type="text" name="hero_typewriter" value="{{ $settings['hero_typewriter']->value ?? '' }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto Principal (Piloto)</label>
+                        @if(isset($settings['hero_image']) && $settings['hero_image']->value)
+                            <div style="margin-bottom: 10px;">
+                                <img src="{{ asset('storage/' . $settings['hero_image']->value) }}" alt="Hero Image" style="max-height: 100px; border-radius: 8px;">
+                            </div>
+                        @endif
+                        <input type="file" name="hero_image" accept="image/*" style="padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; width: 100%; color: white;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['hero_button_1_text']->description ?? 'Texto Botón 1 (Rojo)' }}</label>
+                        <input type="text" name="hero_button_1_text" value="{{ $settings['hero_button_1_text']->value ?? 'Apoyar al Piloto' }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['hero_button_2_text']->description ?? 'Texto Botón 2 (Transparente)' }}</label>
+                        <input type="text" name="hero_button_2_text" value="{{ $settings['hero_button_2_text']->value ?? 'Conocer Más' }}" required>
                     </div>
                 </div>
 

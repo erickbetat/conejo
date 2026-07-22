@@ -136,7 +136,7 @@
             <!-- Text Left -->
             <div class="p-8 md:p-12 animate-fade-in-up text-left">
                 <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                    PILOTO DE FÓRMULA 3
+                    {{ $settings['hero_badge']->value ?? 'PILOTO DE FÓRMULA 3' }}
                 </div>
                 <div class="mb-8 mt-2">
                     <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Conejo Cantú" class="w-full max-w-[300px] md:max-w-md object-contain filter drop-shadow-[0_0_20px_rgba(230,32,32,0.3)] mx-auto md:mx-0">
@@ -147,11 +147,11 @@
                 <div class="flex flex-col sm:flex-row gap-6 opacity-0 translate-y-4 pt-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
                     <a href="#suscripciones" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto pulse-glow">
                         <div class="absolute inset-0 bg-brand-red skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-red-700"></div>
-                        <span class="relative mt-1">Apoyar al Piloto</span>
+                        <span class="relative mt-1">{{ $settings['hero_button_1_text']->value ?? 'Apoyar al Piloto' }}</span>
                     </a>
                     <a href="#biografia" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0">
                         <div class="absolute inset-0 bg-white/5 border border-white/20 skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-white/10"></div>
-                        <span class="relative mt-1">Conocer Más</span>
+                        <span class="relative mt-1">{{ $settings['hero_button_2_text']->value ?? 'Conocer Más' }}</span>
                     </a>
                 </div>
             </div>
@@ -166,7 +166,11 @@
                 
                 <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
                 <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
-                    <img src="{{ asset('images/Cara Concentrado.jpg') }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                    @if(isset($settings['hero_image']) && $settings['hero_image']->value)
+                        <img src="{{ asset('storage/' . $settings['hero_image']->value) }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                    @else
+                        <img src="{{ asset('images/Cara Concentrado.jpg') }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                    @endif
                 </div>
             </div>
         </div>
@@ -308,15 +312,31 @@
                         
                         <div class="z-10 w-full h-full flex flex-col gap-4 p-4">
                             @if($featuredRace && $featuredRace->video_path)
-                                <a href="{{ asset('storage/' . $featuredRace->video_path) }}" target="_blank" class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group" style="text-decoration: none;">
-                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
-                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Ver Video</span>
-                                </a>
+                                <div class="w-full border border-white/10 rounded-xl overflow-hidden h-40 bg-black">
+                                    <video controls class="w-full h-full object-cover">
+                                        <source src="{{ asset('storage/' . $featuredRace->video_path) }}" type="video/mp4">
+                                        Tu navegador no soporta el formato de video.
+                                    </video>
+                                </div>
                             @elseif($featuredRace && $featuredRace->video_url)
-                                <a href="{{ $featuredRace->video_url }}" target="_blank" class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group" style="text-decoration: none;">
-                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
-                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
-                                </a>
+                                @php
+                                    $isYoutube = false;
+                                    $youtubeId = '';
+                                    if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $featuredRace->video_url, $match)) {
+                                        $isYoutube = true;
+                                        $youtubeId = $match[1];
+                                    }
+                                @endphp
+                                @if($isYoutube)
+                                    <div class="w-full border border-white/10 rounded-xl overflow-hidden h-40 bg-black">
+                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ $youtubeId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                @else
+                                    <a href="{{ $featuredRace->video_url }}" target="_blank" class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group" style="text-decoration: none;">
+                                        <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
+                                        <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Ver Video en Enlace</span>
+                                    </a>
+                                @endif
                             @else
                                 <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group">
                                     <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>

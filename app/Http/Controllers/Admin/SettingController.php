@@ -16,8 +16,17 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-        $data = $request->except('_token');
+        $data = $request->except(['_token', 'hero_image']);
         
+        // Manejar subida de archivo para hero_image si existe
+        if ($request->hasFile('hero_image')) {
+            $path = $request->file('hero_image')->store('hero', 'public');
+            Setting::updateOrCreate(
+                ['key' => 'hero_image'],
+                ['value' => $path]
+            );
+        }
+
         foreach ($data as $key => $value) {
             Setting::updateOrCreate(
                 ['key' => $key],
