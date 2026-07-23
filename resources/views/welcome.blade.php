@@ -9,6 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+        /* Loop de Blanco y Negro a Color */
+        @keyframes grayscale-loop {
+            0% { filter: grayscale(100%); }
+            25% { filter: grayscale(100%); } /* 2s en B&N (mitad de tiempo) */
+            37.5% { filter: grayscale(0%); } /* 1s transición a color */
+            87.5% { filter: grayscale(0%); } /* 4s en color */
+            100% { filter: grayscale(100%); } /* 1s transición a B&N */
+        }
+        .animate-grayscale-loop {
+            animation: grayscale-loop 8s infinite;
+        }
+        
         /* Efecto Racing (Drive-in / Drive-out) */
         .racing-text {
             display: inline-block;
@@ -157,7 +169,7 @@
             </div>
             
             <!-- Image Placeholder Right -->
-            <div class="hidden lg:flex justify-center items-end h-[80vh] relative animate-fade-in-up" style="animation-delay: 0.3s;">
+            <div class="flex justify-center items-end h-[50vh] md:h-[60vh] lg:h-[80vh] relative animate-fade-in-up mt-8 lg:mt-0" style="animation-delay: 0.3s;">
                 <!-- Efecto de resplandor detrás del piloto -->
                 <div class="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full z-0"></div>
                 <div class="w-full h-full bg-gradient-to-t from-brand-black via-transparent to-transparent absolute bottom-0 left-0 z-20"></div>
@@ -167,9 +179,9 @@
                 <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
                 <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
                     @if(isset($settings['hero_image']) && $settings['hero_image']->value)
-                        <img src="{{ asset('storage/' . $settings['hero_image']->value) }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        <img src="{{ asset('storage/' . $settings['hero_image']->value) }}" alt="Cristian Cantú" class="w-full h-full object-cover animate-grayscale-loop">
                     @else
-                        <img src="{{ asset('images/Cara Concentrado.jpg') }}" alt="Cristian Cantú" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        <img src="{{ asset('images/Cara Concentrado.jpg') }}" alt="Cristian Cantú" class="w-full h-full object-cover animate-grayscale-loop">
                     @endif
                 </div>
             </div>
@@ -328,8 +340,8 @@
                         <div class="z-10 w-full h-full flex flex-col p-4">
                             @if($featuredRace && $featuredRace->video_path)
                                 <div class="w-full h-full min-h-[300px] flex-grow border border-white/10 rounded-xl overflow-hidden bg-black shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                                    <video controls class="w-full h-full object-cover">
-                                        <source src="{{ asset('storage/' . $featuredRace->video_path) }}" type="video/mp4">
+                                    <video controls preload="metadata" class="w-full h-full object-cover">
+                                        <source src="{{ asset('storage/' . $featuredRace->video_path) }}#t=0.1" type="video/mp4">
                                         Tu navegador no soporta el formato de video.
                                     </video>
                                 </div>
@@ -604,7 +616,11 @@
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_oro_price']->value ?? 188) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">{!! nl2br(e($settings['club_oro_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+
+Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.
+
+Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!')) !!}</p>
                         
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
                             <li class="flex items-start gap-3">
@@ -643,7 +659,11 @@
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_titanio_price']->value ?? 788) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <p class="text-sm text-gray-300 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.<br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">{!! nl2br(e($settings['club_titanio_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+
+Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.
+
+Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!')) !!}</p>
                         
                         <div class="mb-4 font-bold text-gray-300 text-sm italic">Incluye todo Club Oro + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
@@ -680,7 +700,11 @@
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_elite_price']->value ?? 1880) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">Quiero que formes parte real de este camino y que te conviertas en parte del equipo.<br><br>Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto. <strong class="text-white">¡TENDRÁS TU NOMBRE EN MI AUTO!</strong><br><br>Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">{!! nl2br(e($settings['club_elite_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+
+Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto. ¡TENDRÁS TU NOMBRE EN MI AUTO!
+
+Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!')) !!}</p>
                         
                         <div class="mb-4 font-bold text-brand-red text-sm italic">Incluye todo Club Oro y Club Titanio + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
@@ -725,7 +749,7 @@
                         </div>
                         <div class="font-racing text-2xl text-white mb-4">Aportación Única</div>
                         <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
-                            ¿Quieres apoyar aún más al proyecto? Te dejamos la puerta abierta para que tú decidas el monto. ¡Cualquier aportación suma para llegar a lo más alto!
+                            {!! nl2br(e($settings['club_apex_desc']->value ?? '¿Quieres apoyar aún más al proyecto? Te dejamos la puerta abierta para que tú decidas el monto. ¡Cualquier aportación suma para llegar a lo más alto!')) !!}
                         </p>
                     </div>
                     
@@ -754,7 +778,7 @@
                         </div>
                         <div class="font-racing text-2xl text-white mb-4">Aportación Mensual Libre</div>
                         <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
-                            Convierte tu aportación en un cargo recurrente mes a mes. ¡Ayúdanos a tener un apoyo constante en nuestro camino a la meta!
+                            {!! nl2br(e($settings['club_diamante_desc']->value ?? '¿Quieres apoyar de manera constante y a tu medida? Aporta la cantidad que desees mes con mes y sé el motor de este sueño. ¡Cualquier apoyo es clave!')) !!}
                         </p>
                         <div class="mb-4 font-bold text-purple-400 text-sm italic">+ Incluye todos los beneficios del Club Élite</div>
                     </div>

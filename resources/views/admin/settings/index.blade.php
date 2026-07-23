@@ -87,18 +87,57 @@
                     <h2 style="margin-bottom: 1.5rem; color: var(--color-red); font-size: 1.3rem;">Precios del Conejo Club</h2>
                     
                     <div class="form-group">
-                        <label>{{ $settings['club_oro_price']->description }}</label>
-                        <input type="number" name="club_oro_price" value="{{ $settings['club_oro_price']->value }}" required>
+                        <label>{{ $settings['club_oro_price']->description ?? 'Precio del Club Oro (MXN)' }}</label>
+                        <input type="number" name="club_oro_price" value="{{ $settings['club_oro_price']->value ?? 188 }}" required>
                     </div>
                     
                     <div class="form-group">
-                        <label>{{ $settings['club_titanio_price']->description }}</label>
-                        <input type="number" name="club_titanio_price" value="{{ $settings['club_titanio_price']->value }}" required>
+                        <label>{{ $settings['club_oro_desc']->description ?? 'Descripción Club Oro' }}</label>
+                        <textarea name="club_oro_desc" rows="4" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white;" required>{{ $settings['club_oro_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+
+Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.
+
+Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!' }}</textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label>{{ $settings['club_elite_price']->description }}</label>
-                        <input type="number" name="club_elite_price" value="{{ $settings['club_elite_price']->value }}" required>
+                        <label>{{ $settings['club_titanio_price']->description ?? 'Precio del Club Titanio (MXN)' }}</label>
+                        <input type="number" name="club_titanio_price" value="{{ $settings['club_titanio_price']->value ?? 788 }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['club_titanio_desc']->description ?? 'Descripción Club Titanio' }}</label>
+                        <textarea name="club_titanio_desc" rows="4" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white;" required>{{ $settings['club_titanio_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+
+Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.
+
+Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!' }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['club_elite_price']->description ?? 'Precio del Club Élite (MXN)' }}</label>
+                        <input type="number" name="club_elite_price" value="{{ $settings['club_elite_price']->value ?? 1888 }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['club_elite_desc']->description ?? 'Descripción Club Élite' }}</label>
+                        <textarea name="club_elite_desc" rows="4" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white;" required>{{ $settings['club_elite_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+
+Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto. ¡TENDRÁS TU NOMBRE EN MI AUTO!
+
+Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!' }}</textarea>
+                    </div>
+                    
+                    <h2 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-red); font-size: 1.3rem;">Suscripciones Adicionales</h2>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['club_apex_desc']->description ?? 'Descripción Club Apex (Aportación Única)' }}</label>
+                        <textarea name="club_apex_desc" rows="3" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white;" required>{{ $settings['club_apex_desc']->value ?? '¿Quieres apoyar aún más al proyecto? Te dejamos la puerta abierta para que tú decidas el monto. ¡Cualquier aportación suma para llegar a lo más alto!' }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ $settings['club_diamante_desc']->description ?? 'Descripción Club Diamante (Aportación Mensual)' }}</label>
+                        <textarea name="club_diamante_desc" rows="3" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white;" required>{{ $settings['club_diamante_desc']->value ?? '¿Quieres apoyar de manera constante y a tu medida? Aporta la cantidad que desees mes con mes y sé el motor de este sueño. ¡Cualquier apoyo es clave!' }}</textarea>
                     </div>
 
                     <h2 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-red); font-size: 1.3rem;">Contacto (WhatsApp)</h2>
