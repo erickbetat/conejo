@@ -340,7 +340,7 @@
                         <div class="z-10 w-full h-full flex flex-col p-4">
                             @if($featuredRace && $featuredRace->video_path)
                                 <div class="w-full h-full min-h-[300px] flex-grow border border-white/10 rounded-xl overflow-hidden bg-black shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                                    <video controls preload="metadata" class="w-full h-full object-cover">
+                                    <video id="featured-video" controls preload="metadata" muted playsinline class="w-full h-full object-cover">
                                         <source src="{{ asset('storage/' . $featuredRace->video_path) }}#t=0.1" type="video/mp4">
                                         Tu navegador no soporta el formato de video.
                                     </video>
@@ -356,7 +356,7 @@
                                 @endphp
                                 @if($isYoutube)
                                     <div class="w-full h-full min-h-[300px] flex-grow border border-white/10 rounded-xl overflow-hidden bg-black shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ $youtubeId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe id="featured-youtube" width="100%" height="100%" src="https://www.youtube.com/embed/{{ $youtubeId }}?enablejsapi=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
                                 @else
                                     <a href="{{ $featuredRace->video_url }}" target="_blank" class="w-full h-full min-h-[300px] flex-grow bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center hover:bg-black/80 transition-colors cursor-pointer group shadow-[0_0_20px_rgba(0,0,0,0.5)]" style="text-decoration: none;">
@@ -1399,6 +1399,27 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                 // Ocultar banner
                 cookieBanner.classList.add('translate-y-full');
             });
+
+            // Autoplay de video cuando está visible (IntersectionObserver)
+            const videoElement = document.getElementById('featured-video');
+            const youtubeElement = document.getElementById('featured-youtube');
+            
+            if (videoElement || youtubeElement) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (videoElement) videoElement.play().catch(e => console.log('Autoplay prevent:', e));
+                            if (youtubeElement) youtubeElement.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                        } else {
+                            if (videoElement) videoElement.pause();
+                            if (youtubeElement) youtubeElement.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                        }
+                    });
+                }, { threshold: 0.5 }); // Se activa cuando el 50% del video es visible
+
+                if (videoElement) observer.observe(videoElement);
+                if (youtubeElement) observer.observe(youtubeElement);
+            }
         });
     </script>
 </body>
