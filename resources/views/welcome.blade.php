@@ -300,19 +300,34 @@
                         
                         <p class="text-gray-400 font-light max-w-xl mb-8">{!! $featuredRace ? nl2br(e($featuredRace->description)) : 'Una actuación histórica que consolidó a Conejo Cantú en lo más alto del podio de la <strong>Fórmula 4</strong> en el circuito más emblemático del país. Corriendo como categoría principal de soporte durante el fin de semana de la F1, Cristian demostró su talento y determinación frente a miles de aficionados al automovilismo. Saliendo desde los pits por una falla mecánica logra ganar ambas carreras.' !!}</p>
                         
-                        <div class="flex flex-wrap gap-4">
+                        <div class="flex flex-wrap gap-4 mb-8">
                             <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">{{ $featuredRace ? $featuredRace->stat1_label : 'Pos:' }}</span> {{ $featuredRace ? $featuredRace->stat1_value : 'P1' }}</div>
                             <div class="bg-white/5 border border-white/10 text-white font-racing text-2xl px-6 py-2 rounded-lg flex items-center gap-2"><span class="text-brand-red">{{ $featuredRace ? $featuredRace->stat2_label : 'V. Rápida:' }}</span> {{ $featuredRace ? $featuredRace->stat2_value : 'Récord Pista' }}</div>
                         </div>
+                        
+                        <!-- Imagen debajo del texto -->
+                        @if($featuredRace && $featuredRace->image_path)
+                            <div class="w-full border border-white/10 rounded-xl overflow-hidden relative group" style="height: 350px;">
+                                <img src="{{ asset('storage/' . $featuredRace->image_path) }}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500" alt="Podio">
+                            </div>
+                        @else
+                            <!-- Placeholder Foto Podio -->
+                            <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center hover:bg-black/80 transition-colors cursor-pointer group overflow-hidden relative" style="height: 350px;">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 via-blue-500/10 to-red-500/10 opacity-30"></div>
+                                <div class="absolute inset-0 bg-gradient-to-bl from-green-500/10 via-white/10 to-red-500/10 opacity-30"></div>
+                                <span class="text-6xl mb-4 group-hover:scale-110 transition-transform relative z-10">📸</span>
+                                <span class="text-gray-400 text-lg font-racing uppercase tracking-widest text-center relative z-10 px-4">Foto Podio<br><span class="text-sm normal-case text-gray-500 mt-2 block">(Banderas Colombia y México)</span></span>
+                            </div>
+                        @endif
                     </div>
                     
                     <div class="bg-white/5 border-l border-white/5 p-4 flex flex-col items-center justify-center relative overflow-hidden min-h-[250px] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
                         <!-- Red glow effect -->
                         <div class="absolute inset-0 bg-brand-red/10 mix-blend-overlay"></div>
                         
-                        <div class="z-10 w-full h-full flex flex-col gap-4 p-4">
+                        <div class="z-10 w-full h-full flex flex-col p-4">
                             @if($featuredRace && $featuredRace->video_path)
-                                <div class="w-full border border-white/10 rounded-xl overflow-hidden h-40 bg-black">
+                                <div class="w-full h-full min-h-[300px] flex-grow border border-white/10 rounded-xl overflow-hidden bg-black shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                                     <video controls class="w-full h-full object-cover">
                                         <source src="{{ asset('storage/' . $featuredRace->video_path) }}" type="video/mp4">
                                         Tu navegador no soporta el formato de video.
@@ -328,33 +343,19 @@
                                     }
                                 @endphp
                                 @if($isYoutube)
-                                    <div class="w-full border border-white/10 rounded-xl overflow-hidden h-40 bg-black">
+                                    <div class="w-full h-full min-h-[300px] flex-grow border border-white/10 rounded-xl overflow-hidden bg-black shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                                         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ $youtubeId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
                                 @else
-                                    <a href="{{ $featuredRace->video_url }}" target="_blank" class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group" style="text-decoration: none;">
-                                        <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
-                                        <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Ver Video en Enlace</span>
+                                    <a href="{{ $featuredRace->video_url }}" target="_blank" class="w-full h-full min-h-[300px] flex-grow bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center hover:bg-black/80 transition-colors cursor-pointer group shadow-[0_0_20px_rgba(0,0,0,0.5)]" style="text-decoration: none;">
+                                        <span class="text-6xl mb-4 group-hover:scale-110 transition-transform">▶️</span>
+                                        <span class="text-gray-400 text-lg font-racing uppercase tracking-widest text-center">Ver Video en Enlace</span>
                                     </a>
                                 @endif
                             @else
-                                <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group">
-                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">▶️</span>
-                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
-                                </div>
-                            @endif
-                            
-                            @if($featuredRace && $featuredRace->image_path)
-                                <div class="w-full border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 overflow-hidden relative group">
-                                    <img src="{{ asset('storage/' . $featuredRace->image_path) }}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" alt="Podio">
-                                </div>
-                            @else
-                                <!-- Placeholder Foto Podio -->
-                                <div class="w-full bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center h-40 hover:bg-black/80 transition-colors cursor-pointer group overflow-hidden relative">
-                                    <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 via-blue-500/10 to-red-500/10 opacity-30"></div>
-                                    <div class="absolute inset-0 bg-gradient-to-bl from-green-500/10 via-white/10 to-red-500/10 opacity-30"></div>
-                                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform relative z-10">📸</span>
-                                    <span class="text-gray-400 text-sm font-racing uppercase tracking-widest text-center relative z-10 px-2">Foto Podio<br><span class="text-xs normal-case text-gray-500 mt-1 block">(Banderas Colombia y México)</span></span>
+                                <div class="w-full h-full min-h-[300px] flex-grow bg-black/60 border border-white/10 rounded-xl flex flex-col items-center justify-center hover:bg-black/80 transition-colors cursor-pointer group shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                                    <span class="text-6xl mb-4 group-hover:scale-110 transition-transform">▶️</span>
+                                    <span class="text-gray-400 text-lg font-racing uppercase tracking-widest text-center">Video de la Carrera</span>
                                 </div>
                             @endif
                         </div>
