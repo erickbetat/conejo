@@ -25,6 +25,9 @@ Route::get('/', function () {
     return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches', 'featuredRace'));
 });
 
+// Checkout de Merch (Mercado Pago)
+Route::post('/merch/{merch}/checkout', [\App\Http\Controllers\MerchCheckoutController::class, 'checkout'])->name('merch.checkout');
+
 // Rutas de Ayuda/Técnicas
 Route::get('/crear-symlink', function () {
     try {

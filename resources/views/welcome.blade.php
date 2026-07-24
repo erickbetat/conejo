@@ -548,7 +548,7 @@
             <div class="flex flex-wrap justify-center gap-8">
                 @foreach($merches as $merch)
                 <!-- Tarjeta de Merch Minimalista -->
-                <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col group transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(230,32,32,0.1)] cursor-pointer w-full max-w-sm" onclick="openMerchModal('{{ $merch->title }}', '{{ $merch->price }}', '{{ $merch->image_path ? asset('storage/' . $merch->image_path) : '' }}')">
+                <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col group transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(230,32,32,0.1)] cursor-pointer w-full max-w-sm" onclick="openMerchModal({{ $merch->id }}, '{{ addslashes($merch->title) }}', '{{ $merch->price }}', '{{ $merch->image_path ? asset('storage/' . $merch->image_path) : '' }}')">
                     <div class="relative h-72 w-full overflow-hidden bg-black/20 flex items-center justify-center p-6">
                         @if($merch->image_path)
                             <img src="{{ asset('storage/' . $merch->image_path) }}" alt="{{ $merch->title }}" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-700">
@@ -589,9 +589,15 @@
                 <h3 id="merch-modal-title" class="text-3xl font-racing uppercase tracking-wider text-white mb-2">Producto</h3>
                 <div id="merch-modal-price" class="text-2xl text-brand-red font-bold mb-8">MXN $0.00</div>
                 
-                <p class="text-gray-400 text-sm mb-8 font-light">Pronto habilitaremos las compras seguras con Mercado Pago. ¡Mantente atento!</p>
+                <form id="merch-checkout-form" method="POST" action="" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full py-4 bg-[#009ee3] hover:bg-[#008acc] text-white font-racing uppercase tracking-widest rounded-xl transition-all shadow-[0_0_15px_rgba(0,158,227,0.4)] mb-4 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        Comprar con Mercado Pago
+                    </button>
+                </form>
                 
-                <button onclick="closeMerchModal()" class="w-full py-4 bg-white/10 hover:bg-white/20 text-white font-racing uppercase tracking-widest rounded-xl transition-all border border-white/5">Volver</button>
+                <button onclick="closeMerchModal()" class="w-full py-3 bg-white/5 hover:bg-white/10 text-white font-racing uppercase tracking-widest rounded-xl transition-all border border-white/5 text-sm">Volver</button>
             </div>
         </div>
     </div>
@@ -1146,13 +1152,16 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
     <!-- Script de Animaciones y UX -->
     <script>
         // --- Modal de Merch ---
-        function openMerchModal(title, price, imageSrc) {
+        function openMerchModal(id, title, price, imageSrc) {
             const modal = document.getElementById('merch-modal');
             const inner = modal.children[0];
             
             // Llenar datos
             document.getElementById('merch-modal-title').innerText = title;
             document.getElementById('merch-modal-price').innerText = 'MXN $' + parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2});
+            
+            // Actualizar acción del formulario
+            document.getElementById('merch-checkout-form').action = '/merch/' + id + '/checkout';
             
             const imgContainer = document.getElementById('merch-modal-image-container');
             const img = document.getElementById('merch-modal-image');
